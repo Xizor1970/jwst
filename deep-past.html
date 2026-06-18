@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Deep Past — JWST Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-bg" style="background-image: url('https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/outreach/migrated/2022/STScI-01GKT0TT83R41FVZ9JGNWGB2AH.png?w=1920&fit=clip&crop=faces%2Cfocalpoint');"></div>
+    <div class="hero-content">
+        <h1 class="section-title">The Deep Past</h1>
+        <p>Looking back 13.5 billion years to the universe's infancy</p>
+    </div>
+</div>
+
+<nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="deep-past.html" class="active">The Deep Past</a>
+    <a href="exoplanets.html">Exoplanets</a>
+    <a href="stellar-nurseries.html">Stellar Nurseries</a>
+    <a href="cosmological-tensions.html">Tensions</a>
+    <a href="engineering.html">Engineering</a>
+    <a href="dsp.html">Signal Processing</a>
+    <a href="materials.html">Materials</a>
+</nav>
+
+<section>
+    <div class="image-card">
+        <img src="https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/science/2022/07/STScI-01G8H1K2BCNATEZSKVRN9Z69SR.png?w=1200&fit=clip&crop=faces%2Cfocalpoint"
+             alt="JWST First Deep Field - Galaxy Cluster SMACS 0723"
+             loading="lazy">
+        <div class="caption">
+            <h3>Webb's First Deep Field — Galaxy Cluster SMACS 0723</h3>
+            <p>This image covers a patch of sky the size of a grain of sand held at arm's length. Yet it contains thousands of galaxies, some seen as they were over 13 billion years ago. The arcs and streaks are distant galaxies whose light has been bent and magnified by the gravity of the foreground cluster — a phenomenon called gravitational lensing.</p>
+            <p class="credit">Credit: NASA, ESA, CSA, STScI</p>
+        </div>
+    </div>
+
+    <div class="analogy">
+        <strong>Scale check:</strong> That "grain of sand" patch of sky is about 1/13,000,000th of the total sky. If every patch this size contains thousands of galaxies, the observable universe contains roughly <strong>200 billion galaxies</strong>. And this image was taken in just 12.5 hours of exposure. Hubble needed weeks to achieve less.
+    </div>
+
+    <div class="explanation">
+        <h4>Why does this work?</h4>
+        <p>Light travels at a finite speed (~300,000 km/s). When we observe a galaxy 13 billion light-years away, we're seeing light that left it 13 billion years ago. JWST is literally a time machine — the further it looks, the younger the universe it sees.</p>
+        <p>The universe is expanding, stretching light from distant objects to longer (redder) wavelengths. This is why JWST observes in infrared — ancient ultraviolet and visible light has been redshifted beyond what our eyes (or Hubble) can see.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>Engineering analogy:</strong> Redshift is like a radio receiver tuned to the wrong band. Imagine a transmitter broadcasting at 100 MHz, but by the time the signal reaches you, it's been stretched to 7 MHz. You'd need an AM receiver, not FM. Hubble was the FM receiver (visible light). JWST is the AM receiver (infrared) — built specifically to catch these stretched-out ancient signals.
+    </div>
+
+    <div class="formula">
+        λ<sub>observed</sub> = λ<sub>emitted</sub> × (1 + z)
+    </div>
+    <p style="text-align: center; color: #667; font-size: 0.9rem; margin-bottom: 2rem;">
+        At redshift z = 14, UV light at 100 nm arrives at 1500 nm — deep in JWST's NIRCam sweet spot
+    </p>
+
+    <div class="image-card">
+        <img src="https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/outreach/migrated/2022/STScI-01GKT0TT83R41FVZ9JGNWGB2AH.png?w=1200&fit=clip&crop=faces%2Cfocalpoint"
+             alt="JADES Deep Field - Ultra-distant galaxies"
+             loading="lazy">
+        <div class="caption">
+            <h3>JADES Deep Field — Galaxies at the Edge of Time</h3>
+            <p>The JWST Advanced Deep Extragalactic Survey (JADES) has confirmed galaxies at redshift z > 13 — we're seeing them as they were just 300 million years after the Big Bang. Some of these faint red dots are among the oldest objects ever observed.</p>
+            <p class="credit">Credit: NASA, ESA, CSA, M. Zamani (ESA/Webb), Brant Robertson (UC Santa Cruz)</p>
+        </div>
+    </div>
+
+    <div class="question-box">
+        <h4>Unanswered Questions</h4>
+        <ul>
+            <li>Why are early galaxies so massive? Our models say they shouldn't have had time to grow this large.</li>
+            <li>Did the first stars (Population III) form as ultra-massive monsters, lighting up galaxies faster than expected?</li>
+            <li>Are our mass estimates wrong, or do we need fundamentally new physics?</li>
+        </ul>
+    </div>
+
+    <div class="speculation-box">
+        <h4>Could a "denser" spacetime have accelerated galaxy formation?</h4>
+        <p>Here's an intuition worth exploring: in the early universe, everything was closer together. Not just matter — spacetime itself was more compact. The observable universe at z = 14 was roughly <strong>15× smaller in every linear dimension</strong> than today (scale factor a = 1/(1+z) ≈ 1/15). That means the average density of matter was ~3,400× higher than today (density scales as 1/a³).</p>
+
+        <p>Now consider what that means for gravity. The Jeans instability — the threshold where a gas cloud's self-gravity overwhelms its internal pressure and collapses into a star or galaxy — depends on density. The <strong>Jeans mass</strong> (minimum mass that will collapse) actually <em>decreases</em> in denser environments, and the <strong>free-fall time</strong> (how long collapse takes) also shrinks:</p>
+
+        <div class="formula" style="font-size: 1.1rem;">
+            t<sub>ff</sub> = √(3π / 32Gρ)
+        </div>
+
+        <p>At 3,400× the current average density, free-fall time drops by a factor of ~58. Structures that would take a billion years to collapse today could have assembled in ~17 million years back then. So your instinct has real physics behind it: <strong>a denser universe is a faster-assembling universe</strong>.</p>
+
+        <p>But here's the complication: our models already account for this density. The ΛCDM simulations know the universe was denser — they include it in their calculations. And they <em>still</em> can't produce galaxies as massive as what JWST observes. So the density alone isn't enough. Something else must be amplifying the effect:</p>
+
+        <p>• Perhaps the "seeds" (primordial density fluctuations from inflation) were <strong>larger than we measured</strong> from the CMB — giving gravity a head start.<br>
+        • Perhaps dark matter clumped more aggressively at early times — maybe it has a <strong>self-interaction</strong> that matters only at high densities and then becomes negligible as the universe expands.<br>
+        • Perhaps radiative cooling (how fast gas sheds heat so it can compress further) was more efficient than our models assume — some exotic cooling channels (like molecular hydrogen or even dark matter annihilation providing photons) could accelerate the process.</p>
+
+        <p>Think of it this way: the density provides the <strong>pressure</strong> to build (that's correct), but our models already include that pressure. What's missing is either a stronger initial <strong>push</strong> (bigger seeds), a reduced <strong>friction</strong> (faster cooling), or an extra <strong>gravitational pull</strong> (modified dark matter). Your intuition identifies the right ingredient — density — but the mystery is why even accounting for that density, we still come up short.</p>
+
+        <p class="caveat">This is speculative reasoning, connecting established physics (Jeans instability, density evolution) with observed JWST anomalies. The "extra ingredient" remains one of the most active areas of research in cosmology as of 2025–2026. No consensus exists yet.</p>
+    </div>
+</section>
+
+<div class="page-nav">
+    <a href="index.html" class="prev">Home</a>
+    <a href="exoplanets.html" class="next">Exoplanet Atmospheres</a>
+</div>
+
+<footer>
+    <p>All images are public domain, courtesy of NASA, ESA, CSA, and STScI.</p>
+</footer>
+
+</body>
+</html>

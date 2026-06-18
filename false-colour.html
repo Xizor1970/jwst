@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Colour Works — JWST Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-bg" style="background-image: url('https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/science/2022/10/STScI-01GGF8H15VZ09MET9HFBRQX4S3.png?w=1920&fit=clip&crop=faces%2Cfocalpoint'); opacity: 0.25;"></div>
+    <div class="hero-content">
+        <h1 class="section-title">How Colour Works</h1>
+        <p>JWST sees infrared. So how do we get those stunning colour images?</p>
+    </div>
+</div>
+
+<nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="deep-past.html">The Deep Past</a>
+    <a href="exoplanets.html">Exoplanets</a>
+    <a href="stellar-nurseries.html">Stellar Nurseries</a>
+    <a href="stellar-death.html">Stellar Death</a>
+    <a href="black-holes.html">Black Holes</a>
+    <a href="solar-system.html">Solar System</a>
+    <a href="gravitational-lensing.html">Lensing</a>
+    <a href="cosmic-web.html">Cosmic Web</a>
+    <a href="cosmological-tensions.html">Tensions</a>
+    <a href="engineering.html">Engineering</a>
+    <a href="dsp.html">Signal Processing</a>
+    <a href="materials.html">Materials</a>
+    <a href="false-colour.html" class="active">Colour</a>
+    <a href="orbital-mechanics.html">L2 Orbit</a>
+    <a href="politics.html">Politics & Money</a>
+    <a href="future.html">What's Next</a>
+</nav>
+
+<section>
+    <h2>There Is No "True Colour" in Infrared</h2>
+    <p class="subtitle">Every JWST image is a translation from invisible light into something your eyes can perceive</p>
+
+    <div class="explanation">
+        <h4>The fundamental problem</h4>
+        <p>Human eyes see wavelengths from ~380 nm (violet) to ~700 nm (red). JWST observes from 600 nm to 28,000 nm — about 95% of its range is completely invisible to us. There is no "natural" way to display this data in colour, just as there's no "natural" way to display a radio signal as a picture.</p>
+        <p>Every JWST colour image is a <strong>constructed representation</strong> — a deliberate, principled translation from infrared intensity data into visible colour. They're not "fake" (the data is real), but the colours are chosen, not captured.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>The translation analogy:</strong> JWST images are like translating a book from a language you can't read into one you can. The meaning is preserved (physical information), but the specific words (colours) are the translator's choice. A good translation is faithful to the original — and JWST's image team follows strict rules to ensure the colour choices convey physical truth.
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>The Chromatic Ordering Principle</h2>
+
+    <div class="explanation">
+        <h4>The core rule: maintain spectral order</h4>
+        <p>The single most important rule in astronomical colour assignment:</p>
+        <p><strong>Shorter wavelengths → blue. Longer wavelengths → red.</strong></p>
+        <p>This preserves the <em>relative</em> spectral information. If an object is brighter at 2 μm than at 4 μm, it will appear bluer in the image. If it's brighter at 4 μm than at 2 μm, it will appear redder. The absolute colours are arbitrary, but the relationships are physically meaningful.</p>
+        <p>This means you can "read" a JWST image: bluer objects genuinely have shorter-wavelength emission (hotter, less dust, or closer). Redder objects genuinely have longer-wavelength emission (cooler, more dust, or more distant/redshifted).</p>
+    </div>
+
+    <div class="explanation">
+        <h4>How RGB channels are assigned</h4>
+        <p>A colour image requires three channels: Red, Green, Blue. JWST typically uses three (sometimes more) filters for a single colour image. Common assignments for NIRCam:</p>
+        <p><strong>Example — Pillars of Creation:</strong><br>
+        • Blue channel: F090W (0.9 μm) — near-visible, shows starlight<br>
+        • Green channel: F200W (2.0 μm) — near-IR, shows warm dust<br>
+        • Red channel: F444W (4.4 μm) — mid-IR, shows cool dust and embedded objects</p>
+        <p><strong>Example — Deep fields:</strong><br>
+        • Blue: F090W + F115W (0.9–1.15 μm)<br>
+        • Green: F150W + F200W (1.5–2.0 μm)<br>
+        • Red: F277W + F356W + F444W (2.8–4.4 μm)</p>
+        <p>The more filters used, the more spectral information the image encodes — but it remains a lossy compression of the full spectral data into 3 channels.</p>
+    </div>
+
+    <div class="explanation">
+        <h4>NIRCam's filter suite</h4>
+        <p>NIRCam has <strong>29 filters</strong> spanning 0.6–5.0 μm, divided into:</p>
+        <p><strong>Wide filters (W):</strong> Broad wavelength ranges (e.g., F200W covers 1.7–2.2 μm). Maximise signal; used for faint-object detection and colour images.</p>
+        <p><strong>Medium filters (M):</strong> Narrower bands. Used for photometric redshift estimation and stellar classification.</p>
+        <p><strong>Narrow filters (N):</strong> Very narrow bands targeting specific emission lines (e.g., F212N at the H₂ molecular line). Used to map specific physical processes — the glow of shocked hydrogen, ionised gas, or PAH molecules.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>The Image Processing Pipeline</h2>
+
+    <div class="explanation">
+        <h4>From raw data to release image</h4>
+        <p>The STScI image processing team (led by scientists like Joe DePasquale and Alyssa Pagan) follows a workflow:</p>
+        <p><strong>1. Scientific calibration:</strong> The pipeline (see <a href="dsp.html" style="color: #f0c27f;">DSP section</a>) produces calibrated images in each filter — these are greyscale intensity maps in physical units (MJy/sr or electrons/second).</p>
+        <p><strong>2. Alignment and combination:</strong> Multiple exposures are drizzled together, cosmic rays removed, mosaics assembled.</p>
+        <p><strong>3. Channel assignment:</strong> Each filter is mapped to an RGB channel following chromatic ordering.</p>
+        <p><strong>4. Stretching:</strong> Astronomical images have enormous dynamic range (bright stars millions of times brighter than faint galaxies in the same frame). A non-linear "stretch" — typically logarithmic or arcsinh — compresses this range so both bright and faint features are visible simultaneously.</p>
+        <p><strong>5. White balance:</strong> The relative intensity of RGB channels is adjusted so that "average" objects appear neutral (white/grey), ensuring colour differences represent real spectral differences rather than calibration artifacts.</p>
+        <p><strong>6. Noise management:</strong> Background noise in each channel is suppressed (typically by setting a black-level floor just above the noise).</p>
+        <p><strong>7. Artistic refinement:</strong> Minor adjustments to saturation, hue balance, and contrast to make the image visually communicative while remaining scientifically honest.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>The artistic-scientific tension:</strong> Every JWST release image navigates a balance. Too much enhancement makes it look "processed" and undermines trust. Too little makes it visually dull and fails to communicate the science. The STScI team's skill is in making images that are simultaneously beautiful, honest, and informative — where the colour choices encode physical meaning that scientists can extract at a glance.
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>What Colours Mean Physically</h2>
+
+    <div class="explanation">
+        <h4>Reading a JWST image</h4>
+        <p>Once you understand the chromatic principle, JWST images become physically readable:</p>
+        <p><strong>Blue/white points:</strong> Stars in our galaxy (hot, emit mostly at short wavelengths) and nearby compact galaxies.</p>
+        <p><strong>Red points/smudges in deep fields:</strong> Extremely distant galaxies whose light has been redshifted to longer wavelengths — the redder they are, the further away (higher z).</p>
+        <p><strong>Orange/brown regions in nebulae:</strong> Warm dust — small particles heated by nearby stars, emitting thermal radiation in the mid-IR.</p>
+        <p><strong>Diffraction spikes (six-pointed stars):</strong> Bright point sources (stars) creating a diffraction pattern from JWST's hexagonal mirror segments and three-armed secondary mirror support.</p>
+        <p><strong>Cyan/turquoise glow in MIRI images:</strong> PAH (polycyclic aromatic hydrocarbon) emission — complex organic molecules fluorescing when illuminated by UV. Tracers of the interstellar medium.</p>
+    </div>
+
+    <div class="explanation">
+        <h4>NIRCam vs MIRI: the same object, completely different views</h4>
+        <p>The Pillars of Creation illustrate this dramatically:</p>
+        <p><strong>NIRCam (0.6–5 μm):</strong> The pillars appear semi-transparent — you can see stars embedded within and behind them. The dust is partially penetrated. Stars dominate. The scene is ethereal, delicate.</p>
+        <p><strong>MIRI (5–28 μm):</strong> The pillars are opaque dark silhouettes against a glowing background. Stars nearly vanish (they emit little mid-IR). Instead, the edges of the pillars glow with heated dust, and the surrounding medium blazes with PAH emission. The scene is ominous, alien.</p>
+        <p>Same object. Same telescope. Completely different physics revealed. This is why multi-wavelength astronomy matters — every wavelength regime tells a different chapter of the same story.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>Is Hubble "True Colour"?</h2>
+
+    <div class="explanation">
+        <h4>A common misconception</h4>
+        <p>People often assume Hubble's images are "real" colour while JWST's are "false." The truth: <strong>both are constructed</strong>.</p>
+        <p>Hubble also uses filters — it doesn't see in RGB directly. Its images are assembled from greyscale exposures through different filters, mapped to RGB channels. The difference is that some Hubble filters (F435W, F555W, F814W) roughly correspond to blue, green, and red light — so the colour assignments approximate what you'd see with enhanced human vision.</p>
+        <p>But many Hubble images use narrowband filters (e.g., the famous Pillars of Creation uses [S II], Hα, and [O III] mapped to R, G, B) — producing colours that are just as "false" as JWST's. The green in Hubble's nebulae is often ionised oxygen emitting at 500 nm mapped to green — physically plausible, but chosen, not captured.</p>
+        <p>The honest answer: there is no true colour in astronomy. There is only <strong>faithful colour</strong> — colour choices that honestly encode physical information.</p>
+    </div>
+
+    <div class="question-box">
+        <h4>Unanswered Questions</h4>
+        <ul>
+            <li>Could VR/AR environments display JWST data in "expanded colour" — mapping different IR wavelengths to different perceptible hues beyond RGB? Human perception research could enable richer visualisation.</li>
+            <li>As AI image processing improves, could machine learning produce "optimal" colour mappings that maximise information transfer to human viewers?</li>
+            <li>Should JWST release images always maintain strict chromatic ordering, or are there cases where physics-based mapping (e.g., temperature → colour) would be more informative?</li>
+        </ul>
+    </div>
+
+    <div class="speculation-box">
+        <h4>What would JWST's universe "really" look like?</h4>
+        <p>If your eyes could see infrared, JWST's universe would be profoundly different from how we display it:</p>
+        <p>The night sky would be <em>brighter</em> — infrared background radiation (zodiacal dust, interstellar medium) would create a pervasive glow. Dust clouds that appear dark in visible light would glow warmly. The Milky Way would appear as a continuous band of warm emission rather than a patchy streak.</p>
+        <p>Stars would look different: hot blue stars would appear dim (most of their emission is UV, which you can't see), while cool red dwarfs — dim in visible light — would blaze brightly. The most luminous objects would be heavily dust-shrouded things: protostars, active galactic nuclei, ultra-luminous infrared galaxies.</p>
+        <p>The deep-field galaxies would be indistinguishable by eye without spectral analysis — everything would appear as variations of warm glow, with no colour differentiation (since our hypothetical IR-eyes would need to cover a 50× wavelength range, far exceeding visible light's 2× range). The colour images we construct from JWST data are arguably <em>more</em> informative than "real" IR vision would be.</p>
+        <p class="caveat">This is a thought experiment — no organism has eyes spanning 0.6–28 μm. The visualisation choices made by the STScI team may actually convey more physical information than direct perception ever could.</p>
+    </div>
+</section>
+
+<div class="page-nav">
+    <a href="materials.html" class="prev">Materials Science</a>
+    <a href="telescope-time.html" class="next">Winning Telescope Time</a>
+</div>
+
+<footer>
+    <p>All images are public domain, courtesy of NASA, ESA, CSA, and STScI.</p>
+</footer>
+
+</body>
+</html>

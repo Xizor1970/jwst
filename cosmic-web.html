@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cosmic Web — JWST Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-bg" style="background: radial-gradient(ellipse at 50% 50%, rgba(40, 30, 60, 0.4) 0%, rgba(10,10,15,0.95) 70%);"></div>
+    <div class="hero-content">
+        <h1 class="section-title">The Cosmic Web</h1>
+        <p>The largest structure in the universe — filaments of galaxies spanning billions of light-years</p>
+    </div>
+</div>
+
+<nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="deep-past.html">The Deep Past</a>
+    <a href="exoplanets.html">Exoplanets</a>
+    <a href="stellar-nurseries.html">Stellar Nurseries</a>
+    <a href="stellar-death.html">Stellar Death</a>
+    <a href="black-holes.html">Black Holes</a>
+    <a href="solar-system.html">Solar System</a>
+    <a href="gravitational-lensing.html">Lensing</a>
+    <a href="cosmic-web.html" class="active">Cosmic Web</a>
+    <a href="cosmological-tensions.html">Tensions</a>
+    <a href="engineering.html">Engineering</a>
+    <a href="dsp.html">Signal Processing</a>
+    <a href="materials.html">Materials</a>
+    <a href="false-colour.html">Colour</a>
+    <a href="orbital-mechanics.html">L2 Orbit</a>
+    <a href="politics.html">Politics & Money</a>
+    <a href="future.html">What's Next</a>
+</nav>
+
+<section>
+    <h2>The Skeleton of the Universe</h2>
+    <p class="subtitle">Matter isn't scattered randomly — it's arranged in a vast web of filaments, walls, and voids</p>
+
+    <div class="explanation">
+        <h4>What is the cosmic web?</h4>
+        <p>If you could zoom out far enough — beyond galaxies, beyond galaxy clusters, beyond superclusters — you'd see that all the matter in the observable universe is arranged in a <strong>foam-like network</strong>:</p>
+        <p><strong>Filaments:</strong> Thread-like structures of dark matter and galaxies stretching hundreds of millions of light-years. Galaxies flow along them like beads on cosmic strings.</p>
+        <p><strong>Nodes:</strong> Where filaments intersect, matter accumulates into massive galaxy clusters — the densest environments in the universe. Thousands of galaxies, all gravitationally bound.</p>
+        <p><strong>Walls/Sheets:</strong> Thin, planar concentrations of galaxies between filaments. The "Great Wall" (discovered 1989) stretches over 500 million light-years.</p>
+        <p><strong>Voids:</strong> Enormous empty bubbles between filaments — some spanning 300+ million light-years — containing almost no galaxies. The Boötes Void is ~250 million light-years across with only 60 known galaxies inside.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>Visualisation:</strong> The cosmic web looks like the interior of a sponge, or soap foam — thin membranes and filaments enclosing large empty bubbles. The filaments are where galaxies live; the bubbles are almost entirely empty. About 50% of all matter is in filaments, 10% in clusters (nodes), and the remaining 40% is in voids and diffuse sheets.
+    </div>
+
+    <div class="explanation">
+        <h4>How it formed</h4>
+        <p>The cosmic web is a direct prediction of the ΛCDM model, arising from <strong>gravitational instability</strong>:</p>
+        <p><strong>1. Seeds:</strong> Tiny quantum fluctuations during inflation (the first 10⁻³² seconds) created slight density variations — regions that were 0.001% denser or emptier than average.</p>
+        <p><strong>2. Growth:</strong> Over billions of years, slightly denser regions attracted more matter (gravitationally), growing denser still. Emptier regions lost matter, becoming emptier. Positive feedback.</p>
+        <p><strong>3. Collapse:</strong> The densest regions collapsed first along their shortest axis (creating sheets/walls), then along their second axis (creating filaments), then finally at intersections (creating clusters). This hierarchical collapse — predicted by the Zel'dovich approximation (1970) — creates the web's structure from simple initial conditions.</p>
+    </div>
+
+    <div class="formula">
+        Zel'dovich approximation: x(t) = q - D(t)·∇Φ(q)<br>
+        (particle position = initial position - growth factor × gradient of potential)
+    </div>
+
+    <div class="analogy">
+        <strong>The river analogy:</strong> Imagine dropping water uniformly on a slightly uneven landscape. Initially the water is everywhere. But subtle gradients cause it to flow toward low points, forming first sheets (shallow pools), then streams (filaments), then collecting at the lowest points (clusters/nodes). The hilltops empty out (voids). Given enough time, a nearly uniform distribution becomes a complex network — all from gravity acting on tiny initial unevenness.
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>JWST's Contribution: Seeing the Web at Cosmic Dawn</h2>
+
+    <div class="explanation">
+        <h4>Filaments at high redshift</h4>
+        <p>Before JWST, the cosmic web was primarily mapped in the local universe (z < 1) using galaxy redshift surveys (SDSS, 2dF). But the web's evolution — how filaments formed, how gas flowed along them to feed early galaxies — was unobservable.</p>
+        <p>JWST has changed this by detecting:</p>
+        <p><strong>Proto-filaments at z > 5:</strong> Chains of galaxies aligned in structures that appear to be nascent filaments, still assembling. These are the cosmic web in its infancy — filaments being born.</p>
+        <p><strong>Gas in filaments (Lyman-alpha emission):</strong> JWST's NIRSpec has detected glowing hydrogen gas tracing filamentary structures between galaxies at z ~ 3–5. This is the "intergalactic medium" — the gas that feeds galaxies as it streams along filaments.</p>
+        <p><strong>Overdensities around early quasars:</strong> Massive early quasars sit at nodes of the proto-web. JWST has found excesses of galaxies around these quasars, confirming they live at cosmic web intersections even at z > 6.</p>
+    </div>
+
+    <div class="explanation">
+        <h4>The missing baryon problem</h4>
+        <p>A long-standing puzzle: we know how many baryons (ordinary matter) the universe contains (from Big Bang nucleosynthesis and the CMB). But if we add up all the matter in stars, galaxies, and detected gas, we come up ~30–40% short. Where is this "missing" matter?</p>
+        <p>Answer: it's in the filaments. The Warm-Hot Intergalactic Medium (WHIM) — gas at 10⁵–10⁷ K, too hot to emit much light, too cool for X-ray telescopes — pervades the cosmic web's filaments. JWST (and upcoming X-ray missions) are gradually detecting this elusive component, closing the baryon census.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>Dark matter scaffolding:</strong> The visible galaxies in the cosmic web are like Christmas lights strung on invisible wires. The "wires" are dark matter filaments — they formed first, purely through gravity, and then ordinary matter (gas) fell into the dark matter framework and eventually formed visible galaxies. Remove the dark matter and the web collapses — galaxies wouldn't know where to form.
+    </div>
+
+    <div class="question-box">
+        <h4>Unanswered Questions</h4>
+        <ul>
+            <li>How does gas flow along filaments into galaxies? What regulates the feeding rate? This "cold-mode accretion" is theoretically predicted but barely observed.</li>
+            <li>Where exactly is all the missing baryonic matter? Can we close the census completely?</li>
+            <li>How do galaxies "know" about their large-scale environment? Galaxies in dense filaments evolve differently from isolated ones — but the mechanism connecting Mpc-scale environment to kpc-scale galaxy physics is unclear.</li>
+            <li>When did the web first emerge? JWST is pushing to higher redshifts, but the transition from "uniform gas" to "structured web" (z ~ 10–20) remains observationally uncharted.</li>
+        </ul>
+    </div>
+
+    <div class="speculation-box">
+        <h4>Is the cosmic web telling us something about dark matter?</h4>
+        <p>The fine structure of the cosmic web — how sharp the filaments are, how empty the voids are, how quickly structure formed — depends on the <em>nature</em> of dark matter. Different dark matter candidates predict different web structures:</p>
+        <p><strong>Cold dark matter (CDM):</strong> Sharp filaments, abundant small structures, cuspy density profiles. This is what ΛCDM assumes.</p>
+        <p><strong>Warm dark matter (WDM):</strong> Smoother filaments, fewer small structures (WDM streams freely below a "free-streaming scale," erasing small-scale clumps). If JWST's early galaxies are truly massive, WDM models struggle even more than CDM.</p>
+        <p><strong>Fuzzy dark matter (FDM):</strong> Ultra-light particles (~10⁻²² eV) that behave as waves on kpc scales. Produces characteristic "interference fringes" in filaments. If found, it would be a signature of entirely new particle physics.</p>
+        <p>JWST's observations of the early web (how much structure existed at z > 6) are already constraining these models. Too much early structure rules out WDM/FDM variants that predict smooth early universes. Ironically, the "impossible early galaxies" that challenge ΛCDM also challenge the alternatives — leaving us stuck.</p>
+        <p class="caveat">The dark matter particle has not been detected despite decades of laboratory searches. Its nature remains one of the biggest open questions in physics. JWST constrains models indirectly — through what the web looks like — rather than detecting dark matter directly.</p>
+    </div>
+</section>
+
+<div class="page-nav">
+    <a href="gravitational-lensing.html" class="prev">Gravitational Lensing</a>
+    <a href="cosmological-tensions.html" class="next">Cosmological Tensions</a>
+</div>
+
+<footer>
+    <p>All images are public domain, courtesy of NASA, ESA, CSA, and STScI.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Signal Processing — JWST Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-bg" style="background-image: url('https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/science/2022/07/STScI-01G8H1K2BCNATEZSKVRN9Z69SR.png?w=1920&fit=clip&crop=faces%2Cfocalpoint'); opacity: 0.2;"></div>
+    <div class="hero-content">
+        <h1 class="section-title">Digital Signal Processing</h1>
+        <p>Extracting whispers from noise across 1.5 million kilometres</p>
+    </div>
+</div>
+
+<nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="deep-past.html">The Deep Past</a>
+    <a href="exoplanets.html">Exoplanets</a>
+    <a href="stellar-nurseries.html">Stellar Nurseries</a>
+    <a href="cosmological-tensions.html">Tensions</a>
+    <a href="engineering.html">Engineering</a>
+    <a href="dsp.html" class="active">Signal Processing</a>
+    <a href="materials.html">Materials</a>
+</nav>
+
+<section>
+    <h2>The Data Challenge</h2>
+    <p class="subtitle">A 2003-era computer, a 25 Mbit/s straw, and the faintest signals in the universe</p>
+
+    <div class="explanation">
+        <h4>The on-board computer</h4>
+        <p>JWST runs on a <strong>BAE Systems RAD750 processor</strong> — a radiation-hardened PowerPC 750 (Apple G3 era) clocked at <strong>118 MHz</strong> with 44 MB of RAM and a 68 GB solid-state recorder. For context, this is roughly equivalent to a mid-1990s desktop computer. Your phone is about 1,000× more powerful.</p>
+        <p>Why so "slow"? Radiation. At L2, the processor is bombarded by cosmic rays and solar particles. Consumer chips would fail within days. The RAD750 is hardened to withstand <strong>200 krad total ionizing dose</strong> and tolerates single-event upsets (bit flips from particle strikes) without crashing. It runs VxWorks, a real-time operating system. Reliability over raw speed — for a 20-year mission with no repair option, this is the only sane choice.</p>
+        <p>JWST actually uses a <strong>dual-computer architecture</strong>: one RAD750 for the spacecraft bus (attitude control, power, comms) and a dedicated ISIM Command and Data Handling unit for the science instruments, connected by SpaceWire point-to-point links.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>Engineering tradeoff:</strong> It's like choosing between a Formula 1 car and a Land Rover Defender for a 20-year expedition across unmapped terrain with no mechanics for 1.5 million km. The F1 car is faster. The Defender will actually finish.
+    </div>
+
+    <div class="explanation">
+        <h4>Data rates and the communication bottleneck</h4>
+        <p><strong>Raw data generated:</strong> Up to ~58.8 GB per day from all four instruments combined (vs Hubble's 1–2 GB/day). The instruments can produce up to 48 Mbps internally — about six 2048×2048 full-frame images every 10.7 seconds.</p>
+        <p><strong>Downlink capacity:</strong> Ka-band at 25.9 GHz, maximum <strong>28 Mbit/s</strong> (selectable: 7, 14, or 28 Mbps depending on weather at ground stations). Daily contact window: 4–6 hours via the Deep Space Network (Goldstone, Canberra, Madrid). Total daily downlink: ~270 Gbits.</p>
+        <p><strong>The bottleneck:</strong> JWST generates more data than it can send. The 68 GB solid-state recorder holds roughly 24 hours of data before filling. Observations must be carefully scheduled to avoid overflowing it. JWST shares DSN time with ~40 other missions (Parker Solar Probe, Voyager, Mars orbiters).</p>
+        <p><strong>Distance penalty:</strong> The signal from L2 takes ~5 seconds to reach Earth. The received power at the DSN 34-metre dishes is about 10⁻¹⁹ watts — roughly the energy of a single photon arriving every few nanoseconds. QPSK modulation with Reed-Solomon error correction reconstructs the data perfectly from this whisper.</p>
+        <p><strong>An interesting design constraint:</strong> X-band communication was rejected partly because the larger antenna required would disturb the spacecraft's pointing stability during imaging. Ka-band's higher frequency allowed a smaller 0.6 m dish with equivalent gain.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>Bandwidth perspective:</strong> 57 GB/day through a 26 Mbit/s link is like trying to empty a bathtub through a drinking straw — but you only get the straw for 4 hours a day. Everything must be prioritised, compressed, and scheduled. If JWST takes too many observations between contact windows, data is lost. The flight planners balance science ambition against downlink reality daily.
+    </div>
+
+    <div class="formula">
+        Daily data budget: 57 GB generated → ~29 GB compressed → 28.6 Gbit downlink capacity
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>The Detectors</h2>
+    <p class="subtitle">Converting individual photons into numbers</p>
+
+    <div class="explanation">
+        <h4>Near-infrared detectors (NIRCam, NIRSpec, NIRISS): HgCdTe</h4>
+        <p>The near-infrared instruments use <strong>Mercury Cadmium Telluride (HgCdTe)</strong> detector arrays — specifically Teledyne H2RG (HAWAII-2RG) sensors: <strong>2048 × 2048 pixels</strong>, 18 μm pixel pitch, read by 4 amplifiers simultaneously. JWST has <strong>17 of these arrays total</strong> (10 in NIRCam, 2 in NIRSpec, 1 in NIRISS, 2 in the Fine Guidance Sensor).</p>
+        <p><strong>How they work:</strong> Incoming IR photons excite electrons across the HgCdTe bandgap. By adjusting the Mercury-to-Cadmium ratio (x ≈ 0.3 for long-wave, x ≈ 0.45 for short-wave), the bandgap is precisely tuned from 0.24 to 0.5 eV — selecting the cutoff wavelength. The HgCdTe layer is grown by molecular beam epitaxy on a CdZnTe substrate and indium-bump bonded to a silicon readout chip.</p>
+        <p><strong>Read noise (CDS):</strong> 11–18 electrons single-read; reduced to <strong><8 electrons</strong> with Fowler-8 sampling. NIRSpec's IRS2 mode achieves 6 electrons total.</p>
+        <p><strong>Dark current:</strong> 0.002–0.004 e⁻/s/pixel at 37 K — extraordinarily low.</p>
+        <p><strong>Quantum efficiency:</strong> 65–80% for short-wave, >95% (mean 96.8%) for long-wave. At short wavelengths, quantum yield actually exceeds unity — a single energetic photon generates multiple electron-hole pairs.</p>
+        <p><strong>Operating temperature:</strong> 37–40 K (−236°C). Warmer than this, thermal dark current overwhelms the astronomical signal.</p>
+        <p><strong>Operability:</strong> >99% of pixels functional — extraordinary uniformity.</p>
+    </div>
+
+    <div class="explanation">
+        <h4>Mid-infrared detector (MIRI): Si:As</h4>
+        <p>MIRI uses <strong>Arsenic-doped Silicon (Si:As)</strong> Blocked Impurity Band (BIB) detectors — three arrays of <strong>1024 × 1024 pixels</strong>, 25 μm pitch, manufactured by Raytheon. These respond to wavelengths from 5 to 28.5 μm.</p>
+        <p><strong>How it works:</strong> Arsenic atoms in the silicon lattice create impurity energy levels just 54 meV below the conduction band. Mid-IR photons (too weak to cross silicon's full 1.1 eV bandgap) have enough energy to excite electrons from these impurity levels. A thin undoped "blocking" layer prevents thermally-driven hopping conduction that would otherwise produce enormous dark current.</p>
+        <p><strong>Operating temperature:</strong> 6.2–7 K (−267°C). Dark current doubles for every ~2 K increase. Above 7.5 K, thermal noise overwhelms the signal. The pulse-tube/Joule-Thomson cryocooler delivers 55 mW of cooling power at 6.2 K — consuming 295 W of electrical power on the warm side.</p>
+        <p><strong>Performance:</strong> Dark current 0.03–0.17 e⁻/s; read noise ~14 e⁻; well depth ~250,000 e⁻; QE 60–70%; operability >99.9%.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>Detector noise floor:</strong> JWST's NIRCam detectors can detect signals as faint as ~1 photon per second per pixel, sustained over hours. That's like hearing a single whispered syllable per second in a quiet library — and determining exactly what word was spoken — after listening for 10 hours straight.
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>Signal Processing Pipeline</h2>
+    <p class="subtitle">From raw photon counts to the images that rewrite textbooks</p>
+
+    <div class="explanation">
+        <h4>Step 1: Up-the-ramp sampling (on-board)</h4>
+        <p>Unlike a camera that takes a single exposure, JWST detectors are read <strong>non-destructively multiple times</strong> during a single integration. Charge accumulates on each pixel (like water filling a bucket), and the detector is read at regular intervals without resetting — creating a "ramp" of increasing signal.</p>
+        <p><strong>Why this matters:</strong></p>
+        <p>• <strong>Cosmic ray rejection:</strong> A cosmic ray hitting a pixel creates a sudden jump in the ramp. By fitting a straight line to the ramp samples, the jump can be identified and removed. Without this, cosmic rays (which hit every ~10 seconds per detector) would ruin long exposures.</p>
+        <p>• <strong>Reduced read noise:</strong> Fitting a slope through N samples reduces effective read noise by ~√N. With 20+ reads, the 15-electron single-read noise drops to ~3–6 electrons effective.</p>
+        <p>• <strong>Dynamic range:</strong> Bright pixels that saturate early can still be measured from the initial (unsaturated) part of the ramp.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>Engineering analogy:</strong> Up-the-ramp sampling is like measuring water flow by photographing a graduated cylinder every 10 seconds rather than reading it once at the end. If someone bumps the table at t = 40 s (cosmic ray), you can see the discontinuity in your time-series and correct for it. You also get a more precise flow rate by fitting a line through many measurements than from a single noisy reading.
+    </div>
+
+    <div class="formula">
+        Effective read noise ≈ single-read noise / √(N<sub>reads</sub>) ≈ 15e⁻ / √20 ≈ 3.4e⁻
+    </div>
+
+    <div class="explanation">
+        <h4>Step 2: Reference pixel subtraction and 1/f noise</h4>
+        <p>Each H2RG detector has 4 rows and 4 columns of <strong>reference pixels</strong> around its edge — pixels that are not sensitive to light but experience the same electronic drifts as the active pixels. By subtracting the reference pixel signal, low-frequency electronic noise (1/f noise from the SIDECAR ASIC readout electronics) is removed.</p>
+        <p>This is directly analogous to differential signalling in PCB design — common-mode rejection of noise that affects both signal and reference equally.</p>
+        <p><strong>The IRS2 breakthrough (NIRSpec only):</strong> Border reference pixels alone weren't enough to meet NIRSpec's 6 e⁻ noise requirement. Solution: the IRS2 readout mode interleaves <strong>4 reference pixels for every 16 science pixels</strong> during clocking. This distributed reference data is processed in <strong>Fourier space</strong> using frequency-dependent optimal weights, then subtracted. The result: correlated noise suppressed at every spatial frequency, achieving the seemingly impossible 6 e⁻ total noise floor.</p>
+    </div>
+
+    <div class="explanation">
+        <h4>Step 3: Dark current subtraction (ground processing)</h4>
+        <p>Even with no light, detectors generate a small "dark current" — thermal electrons that mimic signal. At 37 K, this is tiny (~0.003 electrons/sec/pixel for NIRCam) but non-zero. Calibration exposures taken with the shutter closed provide a dark frame that is subtracted from every science image.</p>
+    </div>
+
+    <div class="explanation">
+        <h4>Step 4: Flat-field correction</h4>
+        <p>No detector is perfectly uniform. Some pixels are 2% more sensitive, others 3% less. A "flat field" — an image of a uniform light source — maps these pixel-to-pixel variations. Dividing the science image by the flat field corrects for them.</p>
+        <p>Accuracy target: <0.5% photometric error pixel-to-pixel. Achieving this requires calibrating not just sensitivity but also intra-pixel response variations (the sensitivity varies even WITHIN a single pixel depending on where the photon lands).</p>
+    </div>
+
+    <div class="explanation">
+        <h4>Step 5: Astrometric calibration and distortion correction</h4>
+        <p>The optical path introduces geometric distortions — straight lines in the sky appear slightly curved on the detector. A distortion model (polynomial coefficients derived from observations of known star fields) maps each detector pixel to its true sky position. This correction must be accurate to ~5 milliarcseconds — the angle subtended by a 1-cent coin at 800 km distance.</p>
+    </div>
+
+    <div class="explanation">
+        <h4>Step 6: Background subtraction</h4>
+        <p>Even in "empty" space, there's a background glow: zodiacal light (sunlight scattered by interplanetary dust), unresolved faint galaxies, and thermal emission from the telescope itself. This background must be modelled and subtracted to reveal the faintest science targets.</p>
+    </div>
+
+    <div class="explanation">
+        <h4>Step 7: Drizzling and mosaicking</h4>
+        <p>JWST takes multiple slightly-offset exposures (dithers) of the same field. The "drizzle" algorithm combines these sub-pixel-shifted images to produce a final image with resolution <em>better than any single exposure</em> — recovering spatial information between pixel boundaries.</p>
+        <p>For large mosaics (like the JADES deep field), dozens of pointings are stitched together, with overlapping regions used to cross-calibrate brightness levels.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>Drizzling in everyday terms:</strong> Imagine photographing a mosaic floor with a camera whose pixels are bigger than the tiles. Each photo is blurry. But if you take 20 photos, each shifted by half a tile width, you can reconstruct the tile pattern at a resolution your camera "shouldn't" be able to achieve. JWST does this with starlight.
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>The Hardest DSP Problem: Exoplanet Transit Spectroscopy</h2>
+    <p class="subtitle">Extracting 50 ppm signals from systematic noise</p>
+
+    <div class="explanation">
+        <h4>The challenge</h4>
+        <p>Detecting an exoplanet's atmosphere requires measuring brightness changes of 50–200 parts per million over several hours. The dominant noise source is NOT photon noise — it's <strong>instrumental systematics</strong>:</p>
+        <p>• <strong>Pointing jitter:</strong> As the telescope drifts slightly (milliarcseconds), the star image moves across pixels with different sensitivities, creating fake brightness variations of ~100 ppm.</p>
+        <p>• <strong>Detector settling:</strong> After slewing to a new target, detector behaviour is unstable for ~30–60 minutes ("charge trapping" and "persistence" from previous bright exposures).</p>
+        <p>• <strong>1/f noise:</strong> Low-frequency drift in the amplifier electronics creates correlated noise on timescales of minutes to hours — exactly the timescale of a transit.</p>
+        <p>• <strong>Thermal breathing:</strong> Tiny temperature variations in the optics cause focus changes that redistribute light between pixels.</p>
+    </div>
+
+    <div class="explanation">
+        <h4>How they solve it</h4>
+        <p><strong>Decorrelation models:</strong> Measured systematics (telescope position, detector temperature, time since slew) are used as regressors in a linear model. The transit signal is fit simultaneously with the systematic model — essentially asking: "what's the simplest transit shape that explains the residuals after removing known instrumental effects?"</p>
+        <p><strong>Gaussian processes:</strong> For correlated noise that can't be tied to a known physical parameter, Gaussian process regression provides a flexible model of the noise structure without assuming a specific functional form. It's a Bayesian approach to saying "I don't know what's causing this wiggle, but I can characterise its correlation structure."</p>
+        <p><strong>Pixel-level decorrelation:</strong> Instead of summing all light from a star into one number (aperture photometry), each pixel's time-series is analysed independently. This allows sub-pixel sensitivity variations to be modelled and removed.</p>
+        <p><strong>Allan variance analysis:</strong> Used to quantify how noise averages down with integration time. If noise is white (uncorrelated), it should decrease as 1/√t. Departures from this reveal systematic floors — the point beyond which integrating longer doesn't help.</p>
+    </div>
+
+    <div class="formula">
+        Transit depth ≈ (R<sub>planet</sub> / R<sub>star</sub>)² ≈ (0.1 R<sub>☉</sub> / 1.0 R<sub>☉</sub>)² = 1% for a Jupiter<br>
+        Atmospheric signal ≈ 2 × H × R<sub>p</sub> / R<sub>star</sub>² ≈ 50–200 ppm
+    </div>
+
+    <div class="analogy">
+        <strong>The SNR reality:</strong> A single transit observation might have SNR ≈ 3 per spectral channel. That's useless individually — you can't distinguish signal from noise. But stack 10 transit observations and you get SNR ≈ 10. JWST's transit programmes often observe 5–20 transits of the same planet, each 3–8 hours long. A single definitive exoplanet atmosphere measurement can require 100+ hours of telescope time.
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>On-board vs Ground Processing</h2>
+
+    <div class="explanation">
+        <h4>What happens on-board (RAD750)</h4>
+        <p>• Frame averaging (co-adding groups of reads to reduce data volume)<br>
+        • Lossless data compression (~2:1 ratio using a Rice-type algorithm)<br>
+        • Data packetisation for downlink<br>
+        • Instrument health monitoring and fault protection<br>
+        • Guide star acquisition and fine guidance tracking (real-time closed loop at 16 Hz)</p>
+        <p>The flight software does NOT do science processing. No cosmic ray rejection, no flat-fielding, no source detection. All science lives on the ground.</p>
+    </div>
+
+    <div class="explanation">
+        <h4>What happens on the ground (STScI pipeline)</h4>
+        <p>The full pipeline has three stages:</p>
+        <p><strong>Stage 1 (detector-level):</strong> Ramp fitting, saturation flagging, dark subtraction, linearity correction, reference pixel subtraction → produces "rate images" (counts/second per pixel).</p>
+        <p><strong>Stage 2 (calibration):</strong> Flat-field, photometric calibration, WCS assignment, background subtraction → produces calibrated 2D images or extracted spectra.</p>
+        <p><strong>Stage 3 (combination):</strong> Drizzling, mosaicking, source detection, spectral extraction → produces science-ready products.</p>
+        <p>Total processing for a typical deep-field observation: ~2–8 hours of compute time on the STScI cluster. The pipeline is open-source Python (jwst package), meaning any astronomer can re-process the raw data with custom parameters.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>Data lifecycle:</strong> Raw photons hit the detector → accumulate as charge (analogue) → sampled as ADU counts (16-bit digital) → compressed and transmitted → decompressed at STScI → pipeline produces calibrated science images → astronomers extract measurements → papers written → textbooks rewritten. The chain from photon to publication typically takes 3–12 months.
+    </div>
+
+    <div class="question-box">
+        <h4>Unanswered Questions / Active DSP Research</h4>
+        <ul>
+            <li>Can machine learning models outperform traditional pipeline steps for cosmic ray rejection and noise characterisation?</li>
+            <li>The 1/f noise floor currently limits some science cases. Can novel readout schemes (e.g., IPC correction, improved reference pixel strategies) push it lower?</li>
+            <li>As JWST ages, detector degradation (hot pixels, increased dark current) will require adaptive calibration. How will the pipeline evolve?</li>
+            <li>Future telescopes (HWO) will need 10× better stability for Earth-like exoplanet detection (~10 ppb). What DSP innovations are needed?</li>
+        </ul>
+    </div>
+
+    <div class="speculation-box">
+        <h4>The information-theoretic limit: how faint can we go?</h4>
+        <p>There's a fascinating fundamental question buried in JWST's DSP: what's the theoretical limit of information extractable from these data?</p>
+        <p>Consider: JWST's deep fields detect galaxies at magnitude ~31 — that's about <strong>1 photon per 500 seconds per pixel</strong>. At this level, you're not doing traditional imaging — you're doing photon counting statistics. The "image" is really a probability distribution reconstructed from Poisson events.</p>
+        <p>Shannon's channel capacity theorem tells us that the information in a signal is bounded by the number of independent measurements × the SNR. For JWST's deepest observations, we're approaching ~1 bit of information per pixel per hour. The images we see are statistical reconstructions — not photographs in any traditional sense. They're more like medical CT scans built from sparse projections.</p>
+        <p>Future space telescopes may push to magnitude 34+ — where you're measuring ~1 photon per hour per pixel. At that point, the detector must be so stable that you can trust it hasn't drifted over the 100-hour integration needed to build up a signal. The DSP challenge transitions from "filtering noise" to "maintaining calibration stability over absurdly long timescales." This is where JWST's lessons will directly inform HWO's design.</p>
+        <p class="caveat">The Shannon limit framing is illustrative, not rigorous — real astronomical signals have spatial and spectral correlations that provide additional information beyond single-pixel statistics. But the core insight holds: JWST is operating at the edge of what's physically possible with current detector technology.</p>
+    </div>
+</section>
+
+<div class="page-nav">
+    <a href="engineering.html" class="prev">The Engineering Marvel</a>
+    <a href="materials.html" class="next">Materials Science</a>
+</div>
+
+<footer>
+    <p>All images are public domain, courtesy of NASA, ESA, CSA, and STScI.</p>
+</footer>
+
+</body>
+</html>

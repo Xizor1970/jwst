@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmological Tensions — JWST Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-bg" style="background-image: url('https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/science/2022/07/STScI-01G8H1K2BCNATEZSKVRN9Z69SR.png?w=1920&fit=clip&crop=faces%2Cfocalpoint'); opacity: 0.25;"></div>
+    <div class="hero-content">
+        <h1 class="section-title">Cosmological Tensions</h1>
+        <p>When observations disagree with our best model of the universe</p>
+    </div>
+</div>
+
+<nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="deep-past.html">The Deep Past</a>
+    <a href="exoplanets.html">Exoplanets</a>
+    <a href="stellar-nurseries.html">Stellar Nurseries</a>
+    <a href="cosmological-tensions.html" class="active">Tensions</a>
+    <a href="engineering.html">Engineering</a>
+    <a href="dsp.html">Signal Processing</a>
+    <a href="materials.html">Materials</a>
+</nav>
+
+<section>
+    <div class="explanation">
+        <h4>The Standard Model of Cosmology (ΛCDM)</h4>
+        <p>Our best model of the universe says it's made of ~5% ordinary matter, ~27% dark matter, and ~68% dark energy (Λ, the cosmological constant). It predicts how the universe expanded, how structures formed, and how fast galaxies should be receding from us. It has been spectacularly successful for decades.</p>
+        <p>But JWST — along with other modern instruments — is finding cracks.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>What ΛCDM is:</strong> Think of it as the "Standard Model of the Big Picture" — the way the Standard Model of particle physics describes the small, ΛCDM describes the large. It has 6 free parameters and with those 6 numbers, it predicts the age of the universe, the ratio of elements created in the Big Bang, the distribution of galaxies, and the pattern of the cosmic microwave background — all to extraordinary precision. Breaking it is not trivial.
+    </div>
+
+    <div class="explanation">
+        <h4>The Hubble Tension</h4>
+        <p>The universe is expanding. The rate of expansion is called the <strong>Hubble constant (H₀)</strong>. There are two ways to measure it:</p>
+        <p><strong>Method 1 — The early universe:</strong> Look at the cosmic microwave background (the afterglow of the Big Bang) and use ΛCDM to predict what H₀ should be today. Result: <code>H₀ ≈ 67.4 km/s/Mpc</code></p>
+        <p><strong>Method 2 — The local universe:</strong> Measure distances to nearby galaxies using Cepheid variable stars and Type Ia supernovae. Result: <code>H₀ ≈ 73.0 km/s/Mpc</code></p>
+        <p>That's an 8% discrepancy — far too large to be measurement error (it's a 5σ tension). JWST was expected to resolve this by recalibrating the Cepheid distance measurements with its sharper infrared vision. Instead, <strong>it confirmed the local measurement</strong>. The tension is real.</p>
+    </div>
+
+    <div class="formula">
+        H₀ = 67.4 ± 0.5 (early universe) &nbsp; vs &nbsp; H₀ = 73.0 ± 1.0 (local) km/s/Mpc
+    </div>
+
+    <div class="analogy">
+        <strong>What does "km/s/Mpc" mean in practice?</strong> A megaparsec (Mpc) is about 3.26 million light-years. So H₀ = 70 means: for every 3.26 million light-years further away a galaxy is, it's receding 70 km/s faster. The Andromeda galaxy (2.5 million light-years) is too close for this to dominate — local gravity wins. But a galaxy 1 billion light-years away is receding at ~21,000 km/s — about 7% of light speed. The dispute is whether that "70" is actually 67 or 73. Small number — but it changes the age and fate of the universe.
+    </div>
+
+    <div class="analogy">
+        <strong>Why 5σ matters:</strong> In engineering terms, a 5σ discrepancy means the probability of this being a statistical fluke is 1 in 3.5 million. It's the same threshold particle physicists use to claim discovery (the Higgs boson was announced at 5σ). Either one measurement is systematically wrong, or the universe is telling us something.
+    </div>
+
+    <div class="explanation">
+        <h4>The "Impossible" Early Galaxies</h4>
+        <p>As discussed in <a href="deep-past.html" style="color: #f0c27f;">The Deep Past</a>, JWST is finding galaxies at z > 10 that are far too massive and structured for their age. If confirmed, this means either:</p>
+        <p>1. Star formation was dramatically more efficient in the early universe (stars converted gas to luminosity faster than models allow), or</p>
+        <p>2. The timeline itself is wrong — perhaps the universe is older than 13.8 billion years, or expanded differently in its youth.</p>
+        <p>Both options would require rewriting textbooks.</p>
+    </div>
+
+    <div class="explanation">
+        <h4>What could resolve it?</h4>
+        <p><strong>Early Dark Energy:</strong> A burst of dark energy in the first ~100,000 years that boosted expansion briefly, then faded. This could reconcile early and late measurements.</p>
+        <p><strong>New particles:</strong> Extra neutrino species or other light particles in the early universe would change the expansion history.</p>
+        <p><strong>Modified gravity:</strong> Perhaps general relativity needs corrections at cosmological scales.</p>
+        <p>None of these are proven. We may be witnessing the slow death of ΛCDM — or its refinement into something deeper.</p>
+    </div>
+
+    <div class="question-box">
+        <h4>Unanswered Questions</h4>
+        <ul>
+            <li>Is the Hubble Tension a measurement problem or a sign of new physics?</li>
+            <li>Will the "impossible galaxies" hold up to deeper spectroscopic scrutiny, or will mass estimates come down?</li>
+            <li>If ΛCDM is wrong, what replaces it — and can any alternative match its 25 years of successful predictions?</li>
+        </ul>
+    </div>
+
+    <div class="speculation-box">
+        <h4>A slower early expansion = faster structure formation?</h4>
+        <p>Here's another thread connecting the Hubble Tension to the "impossible galaxies" problem — and it ties back to the dense spacetime idea from <a href="deep-past.html" style="color: #fc5c7d;">Section 1</a>.</p>
+        <p>We know the universe expanded <strong>slower</strong> in the early era (when matter density dominated) than it does today (when dark energy dominates and accelerates expansion). In the matter-dominated era, expansion was actively <strong>decelerating</strong> — gravity was winning against the outward momentum from the Big Bang.</p>
+        <p>Now here's the thought experiment: what if the deceleration phase was even <em>more</em> pronounced than ΛCDM predicts? If expansion was slower than we think between z = 20 and z = 6, galaxies would have had <strong>more time</strong> in that dense, slowly-expanding phase to assemble. The clock on the wall (13.8 billion years total) doesn't change, but the clock <em>available for galaxy formation</em> ticks differently if the expansion rate varied.</p>
+        <p>Intriguingly, this connects to the Hubble Tension: if something (early dark energy?) briefly accelerated expansion before z = 1000 and then vanished, it would make the early universe appear to predict a lower H₀ (67.4) while the local universe measures the "real" current rate (73.0). AND it could reshuffle the timing budget, giving galaxies more assembly time in the sweet spot between z = 20 and z = 6.</p>
+        <p>This is essentially the "Early Dark Energy" hypothesis reframed: a transient phenomenon that solves BOTH the Hubble Tension AND the impossible galaxies with a single mechanism. The problem is, nobody has made the maths work cleanly yet — every EDE model that fixes H₀ tends to break something else (like the matter clustering amplitude σ₈).</p>
+        <p class="caveat">This is active, bleeding-edge research. The connection between the Hubble Tension and early galaxy masses is suspected but not proven. Multiple groups are working on models (EDE, New EDE, AdS-EDE) that attempt to solve both simultaneously. As of mid-2026, no single model satisfies all constraints.</p>
+    </div>
+</section>
+
+<div class="page-nav">
+    <a href="stellar-nurseries.html" class="prev">Stellar Nurseries</a>
+    <a href="engineering.html" class="next">The Engineering Marvel</a>
+</div>
+
+<footer>
+    <p>All images are public domain, courtesy of NASA, ESA, CSA, and STScI.</p>
+</footer>
+
+</body>
+</html>

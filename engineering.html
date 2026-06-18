@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Engineering Marvel — JWST Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-bg" style="background-image: url('https://www.nasa.gov/wp-content/uploads/2023/03/26602405532_773fcfaf09_o.jpg');"></div>
+    <div class="hero-content">
+        <h1 class="section-title">The Engineering Marvel</h1>
+        <p>How humanity built the impossible — and unfolded it a million miles from home</p>
+    </div>
+</div>
+
+<nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="deep-past.html">The Deep Past</a>
+    <a href="exoplanets.html">Exoplanets</a>
+    <a href="stellar-nurseries.html">Stellar Nurseries</a>
+    <a href="cosmological-tensions.html">Tensions</a>
+    <a href="engineering.html" class="active">Engineering</a>
+    <a href="dsp.html">Signal Processing</a>
+    <a href="materials.html">Materials</a>
+</nav>
+
+<section>
+    <div class="image-card">
+        <img src="https://www.nasa.gov/wp-content/uploads/2023/03/26602405532_773fcfaf09_o.jpg"
+             alt="JWST Golden Mirror in Clean Room"
+             loading="lazy"
+             style="max-height: 700px; object-fit: cover;">
+        <div class="caption">
+            <h3>The Golden Mirror — 6.5 Meters of Perfection</h3>
+            <p>18 hexagonal beryllium mirror segments, each 1.32 meters across, coated with a gold layer just 100 nanometers thick (about 1000 atoms). Gold was chosen because it reflects infrared light with >98% efficiency. The total collecting area is 25.4 m² — over 6× Hubble's. Each segment can be adjusted with nanometer precision by actuators on its back.</p>
+            <p class="credit">Credit: NASA/Chris Gunn</p>
+        </div>
+    </div>
+
+    <div class="explanation">
+        <h4>The numbers that keep engineers up at night</h4>
+        <p><strong>Location:</strong> L2 Lagrange point, 1.5 million km from Earth (4× the Moon's distance). No servicing missions possible — it had to work perfectly on the first try.</p>
+        <p><strong>Sunshield:</strong> 5 layers of Kapton, each thinner than a human hair. Tennis-court sized (21 × 14 meters). Reduces the Sun-facing side temperature of +85°C to -233°C on the instrument side. The temperature difference across the shield is ~320°C.</p>
+        <p><strong>Deployment:</strong> 344 single-point-of-failure mechanisms had to execute in sequence over 2 weeks. Every hinge, latch, motor, and cable release had to work. If any one failed, the mission was lost. All 344 worked.</p>
+        <p><strong>Mirror alignment:</strong> 18 segments had to be aligned to within 150 nm (about 1/4000th the width of a human hair) — at -233°C, in zero gravity, 1.5 million km from any technician.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>Deployment odds:</strong> 344 single-point-of-failure mechanisms. If each had a 99.9% chance of working (which is considered excellent in aerospace), the probability of ALL succeeding is 0.999³⁴⁴ = ~71%. At 99.5% each, it drops to ~18%. The fact that all 344 worked is a testament to obsessive testing — each mechanism was cycled hundreds of times in thermal vacuum chambers before launch. There was no Plan B.
+    </div>
+
+    <div class="analogy">
+        <strong>Mirror precision:</strong> 150 nm alignment tolerance across a 6.5-meter mirror. Scaled up: if the mirror were the size of South Africa (~1,200 km across), the surface bumps would need to be smaller than 3 centimetres. Achieved remotely, at -233°C, with no possibility of hands-on adjustment.
+    </div>
+
+    <div class="image-card">
+        <img src="https://www.nasa.gov/wp-content/uploads/2023/03/51942282534_19d5470826_o_0.jpeg"
+             alt="JWST Mirror Alignment Selfie"
+             loading="lazy">
+        <div class="caption">
+            <h3>Mirror Alignment "Selfie" — All 18 Segments Working as One</h3>
+            <p>Taken using a pupil imaging lens inside NIRCam during commissioning (March 2022). Each bright hexagon is one mirror segment, all now aligned to focus on the same star. This image confirmed that the most complex space deployment ever attempted had succeeded.</p>
+            <p class="credit">Credit: NASA/STScI</p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>The Micro-Shutter Array</h2>
+    <p class="subtitle">249,660 mechanical trap doors, each the width of a human hair</p>
+
+    <div class="explanation">
+        <h4>The problem it solves</h4>
+        <p>The NIRSpec instrument needs to take spectra (chemical fingerprints) of many objects simultaneously. But how do you isolate light from 100+ individual galaxies in a crowded field?</p>
+        <p>Answer: a grid of <strong>249,660 physical mechanical shutters</strong>, each just 100 × 200 micrometres (about the width of a human hair × two hair-widths). They are real, physical trap doors — not electronic pixels — made from silicon nitride (Si₃N₄) membranes thinner than a micrometre, fabricated using MEMS (micro-electro-mechanical systems) technology at NASA Goddard.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>Scale analogy:</strong> Each shutter is roughly the size of a grain of pollen. The entire array — a quarter-million shutters — fits on four chips that together are about the size of a postage stamp. It's the first mission-critical MEMS device ever flown in space.
+    </div>
+
+    <div class="explanation">
+        <h4>How do you open 249,660 individual trap doors?</h4>
+        <p>The actuation uses a brilliant two-stage system:</p>
+        <p><strong>Step 1 — Magnetic sweep (bulk open):</strong> A permanent magnet on a mechanical arm sweeps across the array. Magnetic material deposited on each shutter blade causes ALL shutters to flip open to 90° as the magnet passes — like a wave of dominoes.</p>
+        <p><strong>Step 2 — Electrostatic latch (selective hold):</strong> As the magnet sweeps back, each shutter wants to fall closed. But shutters that should stay open have a voltage applied between front electrodes (on the door) and back electrodes (on the grid walls). Electrostatic attraction holds them open. Shutters where you WANT them closed? Simply remove the voltage — the magnet gently pulls them shut on the return sweep.</p>
+        <p><strong>Addressing:</strong> Row-and-column electrode lines (like an old LCD matrix) let the system individually address any shutter. High-voltage driver circuits — which must work reliably at 35 Kelvin (−238°C) — control the latching voltages column by column as the magnet returns.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>Think of it like this:</strong> Imagine a football stadium with 250,000 seats, each with a flip-up seat. A giant magnet sweeps across and flips ALL seats up. Then, electrically, you tell specific seats to stay up (the ones where your target galaxies are). All others fall back down. Now only starlight from your chosen galaxies reaches the detector — everything else is blocked. You've turned one telescope into 100+ simultaneous spectrographs.
+    </div>
+
+    <div class="explanation">
+        <h4>Engineering challenges at -238°C</h4>
+        <p><strong>Thermal stress:</strong> Silicon nitride, metal electrodes, and silicon contract at different rates as they cool from room temperature to 35 K. The membranes must survive this without cracking or warping. This required precise "residual stress engineering" — baking in just the right amount of internal tension during manufacturing.</p>
+        <p><strong>Acoustic fragility:</strong> These sub-micrometre membranes are astonishingly delicate. During ground testing, the original flight array suffered severe acoustic damage from vibration testing (simulating launch). The entire array had to be <strong>replaced</strong> — a major programme setback. The replacement survives launch loads but it was close.</p>
+        <p><strong>Reliability:</strong> As of 2024, about 82.5% of shutters remain fully operable. The main failure mode is electrical shorts between adjacent shutters causing "glow" contamination — affected rows/columns are disabled in software. The rate of new failures has stabilized, and science operations remain unaffected.</p>
+        <p><strong>Power budget:</strong> The entire array must dissipate less than 40 milliwatts at 35 K. For context, a single LED indicator light on your laptop uses more power than this quarter-million-actuator mechanical system.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>Other Engineering Innovations</h2>
+
+    <div class="explanation">
+        <h4>The Cryocooler</h4>
+        <p>The MIRI instrument operates at 7 Kelvin (−266°C) — colder than deep space itself. A mechanical cryocooler actively pumps heat away, since passive cooling alone can't reach temperatures this low.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>Temperature perspective:</strong> MIRI operates at 7 K. Absolute zero is 0 K. The cosmic microwave background — the literal temperature of empty space — is 2.7 K. So JWST's coldest instrument operates at about 2.5× the temperature of the void between galaxies, and the cryocooler maintains this against the constant heat leaking in from the warmer side of the sunshield. Space isn't cold enough; they have to make it colder.
+    </div>
+
+    <div class="explanation">
+        <h4>Fuel efficiency and lifespan</h4>
+        <p>JWST's orbit at L2 requires minimal station-keeping fuel. The original 10-year fuel estimate has been extended — current projections suggest 20+ years of operational life. The Ariane 5 launch was so precise that it saved significant fuel that would have been needed for course corrections.</p>
+    </div>
+
+    <div class="question-box">
+        <h4>Engineering Challenges Ahead</h4>
+        <ul>
+            <li>Micrometeorite impacts are slowly degrading mirror segments. How will performance change over 20 years?</li>
+            <li>Can software updates extend JWST's capabilities beyond its original design — as Hubble's instruments were physically upgraded?</li>
+            <li>What lessons from JWST will shape the next generation of space telescopes (HWO, the Habitable Worlds Observatory)?</li>
+            <li>The NexGen Micro-Shutter Array (fully electrostatic, no magnet arm) is in development at NASA Goddard — will it fly on HWO?</li>
+        </ul>
+    </div>
+</section>
+
+<div class="page-nav">
+    <a href="cosmological-tensions.html" class="prev">Cosmological Tensions</a>
+    <a href="dsp.html" class="next">Digital Signal Processing</a>
+</div>
+
+<footer>
+    <p>All images are public domain, courtesy of NASA, ESA, CSA, and STScI.</p>
+</footer>
+
+</body>
+</html>

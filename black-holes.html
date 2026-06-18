@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Holes — JWST Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-bg" style="background: radial-gradient(circle at 50% 50%, rgba(20, 10, 40, 0.4) 0%, rgba(10,10,15,0.95) 50%);"></div>
+    <div class="hero-content">
+        <h1 class="section-title">Black Holes</h1>
+        <p>Too massive, too soon — supermassive black holes that defy our understanding of cosmic growth</p>
+    </div>
+</div>
+
+<nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="deep-past.html">The Deep Past</a>
+    <a href="exoplanets.html">Exoplanets</a>
+    <a href="stellar-nurseries.html">Stellar Nurseries</a>
+    <a href="stellar-death.html">Stellar Death</a>
+    <a href="black-holes.html" class="active">Black Holes</a>
+    <a href="solar-system.html">Solar System</a>
+    <a href="gravitational-lensing.html">Lensing</a>
+    <a href="cosmic-web.html">Cosmic Web</a>
+    <a href="cosmological-tensions.html">Tensions</a>
+    <a href="engineering.html">Engineering</a>
+    <a href="dsp.html">Signal Processing</a>
+    <a href="materials.html">Materials</a>
+    <a href="false-colour.html">Colour</a>
+    <a href="orbital-mechanics.html">L2 Orbit</a>
+    <a href="politics.html">Politics & Money</a>
+    <a href="future.html">What's Next</a>
+</nav>
+
+<section>
+    <h2>The Same Problem as Galaxies — But Worse</h2>
+    <p class="subtitle">JWST is finding supermassive black holes at z > 10 that shouldn't have had time to grow</p>
+
+    <div class="explanation">
+        <h4>The growth problem</h4>
+        <p>A black hole can only grow by accreting matter — but physics imposes a speed limit. When gas falls onto a black hole, it heats up and radiates. That radiation pushes outward on infalling gas, creating a maximum accretion rate called the <strong>Eddington limit</strong>. At this limit, a black hole roughly doubles its mass every ~45 million years.</p>
+        <p>Starting from a stellar-mass seed (~100 M☉ from a massive star's death), even growing continuously at the Eddington limit for 700 million years (the age of the universe at z ~ 7), you can reach ~10⁶–10⁷ M☉. But JWST is finding black holes of <strong>10⁸–10⁹ M☉</strong> at z > 7. They're 10–1,000× too massive for their age.</p>
+    </div>
+
+    <div class="formula">
+        Eddington growth: M(t) = M<sub>seed</sub> × e<sup>t/t<sub>Edd</sub></sup>, where t<sub>Edd</sub> ≈ 45 Myr<br>
+        Starting at 100 M☉, after 700 Myr: ~10⁷ M☉ maximum — yet we observe 10⁸–10⁹ M☉
+    </div>
+
+    <div class="analogy">
+        <strong>The growth timeline problem:</strong> Imagine planting a seed on Monday and finding a 100-year-old oak tree by Wednesday. The growth rate of trees doesn't allow it — either the seed was already a sapling (heavy seed), or the tree grew faster than biology permits (super-Eddington accretion), or the calendar is wrong. JWST is finding the cosmic equivalent of impossibly old trees in impossibly young forests.
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>Key Discoveries</h2>
+
+    <div class="explanation">
+        <h4>GN-z11: A black hole at z = 10.6</h4>
+        <p>One of the most distant galaxies known (seen 430 million years after the Big Bang). JWST's NIRSpec detected broad emission lines indicating an accreting supermassive black hole — an Active Galactic Nucleus (AGN). Estimated black hole mass: ~10⁶ M☉.</p>
+        <p>While "only" a million solar masses, getting this large in just 430 million years is extremely challenging via standard accretion. If it grew from a stellar seed, it would need sustained super-Eddington accretion — or a much heavier starting seed.</p>
+    </div>
+
+    <div class="explanation">
+        <h4>UHZ1: A "direct collapse" black hole candidate at z = 10.1</h4>
+        <p>Detected behind the lensing cluster Abell 2744. X-ray observations (Chandra) combined with JWST infrared revealed a black hole whose mass is comparable to its host galaxy's stellar mass — roughly <strong>10⁷–10⁸ M☉</strong>. In the local universe, black holes are typically 0.1% of their galaxy's mass. This one is ~100% — suggesting it formed as a <strong>heavy seed</strong> that hasn't yet been outgrown by its host.</p>
+        <p>This is the strongest evidence yet for "direct collapse black holes" — objects that formed not from stellar death, but from the direct gravitational collapse of massive gas clouds (10⁴–10⁵ M☉) without passing through a stellar phase.</p>
+    </div>
+
+    <div class="explanation">
+        <h4>The "Little Red Dots" — a mysterious population</h4>
+        <p>JWST surveys (JADES, CEERS, UNCOVER) have uncovered hundreds of compact, very red objects at z ~ 4–9 that defy easy classification. They're being called <strong>"Little Red Dots" (LRDs)</strong>:</p>
+        <p>• Extremely compact (unresolved even at JWST's resolution)<br>
+        • Very red in the rest-frame optical but relatively blue in the UV — a distinctive "V-shaped" spectral energy distribution<br>
+        • Many show broad emission lines (Hα, Hβ) suggesting AGN activity<br>
+        • But their X-ray emission is often surprisingly weak — inconsistent with unobscured AGN</p>
+        <p><strong>What are they?</strong> The debate continues. Options include: heavily dust-reddened AGN (the dust absorbs X-rays too), super-Eddington accreting black holes in a photon-trapped state, or compact star-forming galaxies with unusual dust geometry. Some may be both — a central AGN plus a compact starburst. They appear far more common at high-z than predicted, suggesting a phase of black hole growth we didn't know existed.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>How Did They Get So Big?</h2>
+
+    <div class="explanation">
+        <h4>Three formation channels</h4>
+        <p><strong>1. Light seeds (stellar remnants):</strong> The first massive stars (~100–300 M☉, Population III) die as black holes. These must then grow via continuous near-Eddington accretion for hundreds of millions of years — requiring a steady gas supply with no interruption. Possible but demanding.</p>
+        <p><strong>2. Heavy seeds (direct collapse):</strong> In rare conditions — pristine gas (no metals, which would fragment the cloud), strong UV radiation field (preventing cooling), and massive inflow rates — a gas cloud of 10⁴–10⁵ M☉ can collapse directly into a black hole without ever forming stars. These "Direct Collapse Black Holes" (DCBHs) start 100–1,000× heavier than stellar seeds, dramatically reducing the growth time needed.</p>
+        <p><strong>3. Runaway mergers:</strong> In dense early star clusters, massive stars can collide and merge repeatedly before exploding, creating intermediate-mass black holes (10³–10⁴ M☉) that then grow by accretion. Requires very specific dynamical conditions.</p>
+    </div>
+
+    <div class="explanation">
+        <h4>Super-Eddington accretion</h4>
+        <p>Perhaps the Eddington limit isn't as hard as we thought. In certain geometries — particularly "slim disks" where the accretion flow is optically thick and photons are trapped within the flow — radiation can't escape efficiently, allowing accretion at 10–100× the standard Eddington rate. The black hole grows enormously fast, but the excess radiation is swallowed along with the gas.</p>
+        <p>The "Little Red Dots" may be this phase caught in action — black holes growing so fast that their radiation is trapped, explaining both their extreme luminosity and their surprisingly weak X-ray emission.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>Super-Eddington feeding:</strong> The Eddington limit is like the maximum rate you can pour water into a funnel — pour too fast and it overflows (radiation pushes gas away). But if you submerge the funnel and feed it through a tube underwater (photon trapping), the overflow mechanism doesn't work. You can pour as fast as the tube allows. This may be how early black holes grew so fast — buried deep in dense gas, their radiation couldn't escape to resist further infall.
+    </analogy>
+
+    <div class="divider"></div>
+
+    <h2>Black Holes and Galaxy Evolution</h2>
+
+    <div class="explanation">
+        <h4>Chicken or egg?</h4>
+        <p>In the local universe, supermassive black holes and their host galaxies follow tight correlations — the M–σ relation links black hole mass to galaxy stellar velocity dispersion. This suggests they co-evolve. But which came first?</p>
+        <p>JWST's findings at high-z (where black holes are ~100% of galaxy mass, not 0.1%) suggest that in the early universe, <strong>black holes may have formed first</strong> — and the galaxy grew around them later. This inverts the standard narrative and implies that AGN feedback (energy and radiation from the accreting black hole) may have regulated, not just terminated, early star formation.</p>
+    </div>
+
+    <div class="explanation">
+        <h4>AGN feedback: creation and destruction</h4>
+        <p><strong>Negative feedback:</strong> Powerful jets and radiation from AGN heat surrounding gas, preventing it from cooling and forming stars. This "quenches" galaxies — explains why the most massive galaxies today are dead (no star formation).</p>
+        <p><strong>Positive feedback:</strong> Jets and outflows compress gas in adjacent regions, triggering star formation where it wouldn't otherwise occur. Like stellar nursery feedback but at galaxy scales.</p>
+        <p>JWST is now detecting both modes in action at z > 6 — outflows from AGN that are simultaneously quenching their host's centre while triggering starbursts in the outskirts.</p>
+    </div>
+
+    <div class="question-box">
+        <h4>Unanswered Questions</h4>
+        <ul>
+            <li>Did most supermassive black holes form via direct collapse, or can stellar seeds grow fast enough? The relative importance of each channel remains unknown.</li>
+            <li>What exactly are the Little Red Dots? Are they a universal phase of early black hole growth, or a distinct population?</li>
+            <li>Can JWST + LISA (gravitational waves, launching ~2035) together trace the full mass assembly of black holes from seed to supermassive?</li>
+            <li>Does every galaxy have a central black hole, or only those above a certain mass? JWST may detect (or fail to detect) AGN in the faintest early galaxies.</li>
+        </ul>
+    </div>
+
+    <div class="speculation-box">
+        <h4>Did black holes seed the first galaxies?</h4>
+        <p>Here's a radical inversion of the standard picture: what if supermassive black holes didn't form <em>inside</em> early galaxies — but rather, galaxies formed <em>around</em> black holes?</p>
+        <p>The scenario: a direct-collapse black hole forms at z ~ 20–30 in a pristine gas halo. Its gravitational pull concentrates surrounding gas. Its accretion luminosity ionises and heats nearby gas, but in doing so creates a hot "bubble" surrounded by a dense, compressed shell — and it's in that shell that the first stars of the future galaxy form.</p>
+        <p>In this picture, the black hole acts as a <strong>gravitational seed and energy source</strong> that bootstraps galaxy formation. It explains why UHZ1-type objects have black hole mass comparable to galaxy mass — the black hole came first, and the galaxy is still catching up.</p>
+        <p>This would also help explain the "impossible early galaxies" problem: if black holes form quickly (direct collapse takes only ~1 Myr) and then accelerate star formation in their vicinity via positive feedback, galaxies could assemble much faster than models predict based on gravity alone.</p>
+        <p class="caveat">This "black-hole-first" scenario is theoretically plausible and consistent with several JWST observations (UHZ1, overmassive BHs at high-z, LRDs). But it's far from proven — the statistics are small, the mass estimates uncertain, and alternative explanations (light seeds + super-Eddington growth) remain viable. This is frontier cosmology.</p>
+    </div>
+</section>
+
+<div class="page-nav">
+    <a href="stellar-death.html" class="prev">The Death of Stars</a>
+    <a href="solar-system.html" class="next">Solar System</a>
+</div>
+
+<footer>
+    <p>All images are public domain, courtesy of NASA, ESA, CSA, and STScI.</p>
+</footer>
+
+</body>
+</html>
