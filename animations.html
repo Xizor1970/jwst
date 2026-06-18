@@ -79,6 +79,31 @@
             font-size: 0.9rem;
             min-width: 60px;
         }
+        .viz-explainer {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid rgba(255,255,255,0.03);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .viz-explainer .what-it-shows,
+        .viz-explainer .why-it-matters {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #99a;
+        }
+        .viz-explainer h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+        .viz-explainer .what-it-shows h4 { color: #f0c27f; }
+        .viz-explainer .why-it-matters h4 { color: #6a82fb; }
+        @media (max-width: 768px) {
+            .viz-explainer { grid-template-columns: 1fr; gap: 1rem; }
+        }
     </style>
 </head>
 <body>
@@ -114,6 +139,16 @@
         <span class="value-display" id="redshift-value">z = 0</span>
         <button id="redshift-play">Play Animation</button>
     </div>
+    <div class="viz-explainer">
+        <div class="what-it-shows">
+            <h4>What you're seeing</h4>
+            <p>A light wave emitted by a distant galaxy (left, blue/UV) gets physically stretched as the space it travels through expands. By the time it reaches JWST (right), the wavelength has been multiplied by (1+z). At z = 14, a 400 nm UV wave arrives at 6,000 nm — deep infrared, invisible to human eyes and to Hubble.</p>
+        </div>
+        <div class="why-it-matters">
+            <h4>So what?</h4>
+            <p>This is why JWST was built as an infrared telescope. The most ancient light in the universe — from the first galaxies, the first stars — has been stretched beyond what any visible-light telescope can detect. Without infrared sensitivity, the first 500 million years of cosmic history would be permanently invisible. Redshift isn't just a measurement — it's the reason JWST exists.</p>
+        </div>
+    </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
@@ -131,6 +166,16 @@
         <label>Planet size:</label>
         <input type="range" id="transit-size" min="5" max="30" step="1" value="15">
     </div>
+    <div class="viz-explainer">
+        <div class="what-it-shows">
+            <h4>What you're seeing</h4>
+            <p>A planet passes in front of its host star. The light curve (right) shows the star's total brightness dropping as the planet blocks a fraction of the starlight. The transit depth equals (R_planet/R_star)² — a Jupiter-sized planet blocks ~1%, an Earth-sized planet just 0.008% (80 ppm). The thin atmosphere ring absorbs specific wavelengths during transit.</p>
+        </div>
+        <div class="why-it-matters">
+            <h4>So what?</h4>
+            <p>This is how JWST "tastes" alien air. By comparing the star's spectrum during transit (planet in front) vs out of transit (planet beside), JWST identifies which molecules are in the atmosphere. A 50 ppm difference between wavelengths tells you there's water, CO₂, or methane. This is how we detected the possible biosignature DMS on K2-18b — a measurement so delicate it's like detecting a coloured wrapper in front of a torch 1,400 km away.</p>
+        </div>
+    </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
@@ -145,6 +190,16 @@
     <canvas id="sunshield-canvas" width="1000" height="350"></canvas>
     <div class="viz-controls">
         <button id="sunshield-play">Animate Heat Flow</button>
+    </div>
+    <div class="viz-explainer">
+        <div class="what-it-shows">
+            <h4>What you're seeing</h4>
+            <p>Five Kapton membrane layers, separated by vacuum gaps. The Sun blasts Layer 1 at 1,360 W/m². Each layer absorbs radiation from its neighbour, re-emits half outward to space and half inward. With no conduction between layers (vacuum), temperature cascades down exponentially: 383 K → 253 K → 183 K → 133 K → 50 K. By the cold side, less than 1 milliwatt per square metre leaks through.</p>
+        </div>
+        <div class="why-it-matters">
+            <h4>So what?</h4>
+            <p>JWST's detectors must operate at -233°C (NIR) and -266°C (MIRI). Any stray heat blinds them — their own thermal glow would overwhelm the faint signals from 13-billion-year-old galaxies. Five layers of plastic, each thinner than a human hair, provide a sun protection factor of 1,000,000×. Without this passive cooling system, JWST would need an impossibly large cryogen tank or couldn't operate at all. It's the single most critical enabling technology.</p>
+        </div>
     </div>
 </div>
 
@@ -163,6 +218,16 @@
         <label>Cosmic ray at read:</label>
         <input type="range" id="ramp-cr" min="3" max="18" step="1" value="12">
     </div>
+    <div class="viz-explainer">
+        <div class="what-it-shows">
+            <h4>What you're seeing</h4>
+            <p>A single pixel accumulating charge over time (the "ramp"). JWST reads the detector non-destructively 20+ times during one exposure. Each dot is a read. The slope = signal rate. A cosmic ray hitting at one read creates a sudden jump. The blue fit line ignores the jump and recovers the true slope from the clean segments.</p>
+        </div>
+        <div class="why-it-matters">
+            <h4>So what?</h4>
+            <p>At L2, a cosmic ray hits every ~10 seconds per detector. Without ramp sampling, long exposures (hours for deep fields) would be ruined — every pixel would be hit multiple times. This technique saves the data: instead of discarding an entire hour-long frame, you discard one corrupted read and keep the other 19. It also reduces read noise by √N and extends dynamic range. It's the DSP innovation that makes JWST's faint-object science possible.</p>
+        </div>
+    </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
@@ -180,6 +245,16 @@
         <input type="range" id="lensing-mass" min="1" max="10" step="0.5" value="5">
         <span class="value-display" id="lensing-mass-val">5 × 10¹⁴ M☉</span>
     </div>
+    <div class="viz-explainer">
+        <div class="what-it-shows">
+            <h4>What you're seeing</h4>
+            <p>A foreground galaxy cluster (gold dot) warps spacetime, bending the light from blue background galaxies into arcs and multiple images. Move the lens closer to a source and it distorts more dramatically. Increase mass and the Einstein radius grows — more distant sources get captured into the lensing regime. Perfect alignment produces an Einstein ring.</p>
+        </div>
+        <div class="why-it-matters">
+            <h4>So what?</h4>
+            <p>Gravitational lensing gives JWST free magnification — nature's telescope on top of our telescope. At 10,000× magnification, the combined system is equivalent to a 600-metre mirror. This is how Earendel (a single star at z=6.2) was detected — impossible without lensing for any telescope that will exist in this century. Lensing also maps dark matter: the distortion pattern reveals mass that emits no light. It's the only way to "see" 85% of the universe's matter.</p>
+        </div>
+    </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
@@ -194,6 +269,16 @@
     <canvas id="shutter-canvas" width="1000" height="400"></canvas>
     <div class="viz-controls">
         <button id="shutter-play">Run Actuation Cycle</button>
+    </div>
+    <div class="viz-explainer">
+        <div class="what-it-shows">
+            <h4>What you're seeing</h4>
+            <p>249,660 physical trap doors, each 100×200 μm (grain-of-pollen sized). Phase 1: a magnet arm sweeps left-to-right, flipping ALL shutters open (the red line). Phase 2: electrostatic voltage holds selected shutters open (blue dots = target galaxies). Phase 3: the magnet returns and unlatched shutters fall closed. Only light from target objects reaches the detector.</p>
+        </div>
+        <div class="why-it-matters">
+            <h4>So what?</h4>
+            <p>Without microshutters, NIRSpec could take a spectrum of only ONE object at a time. With them, it observes 100+ galaxies simultaneously — multiplying efficiency by 100×. A deep-field spectroscopic survey that would take 50 years becomes achievable in 6 months. This is the engineering that transformed JWST from a deep imager into the spectroscopic powerhouse that identifies galaxy redshifts, black hole masses, and atmospheric compositions in bulk. It's also the first mission-critical MEMS device ever flown in space.</p>
+        </div>
     </div>
 </div>
 
@@ -211,6 +296,16 @@
         <button id="orbit-play">Start / Pause</button>
         <label>Speed:</label>
         <input type="range" id="orbit-speed" min="1" max="10" step="1" value="3">
+    </div>
+    <div class="viz-explainer">
+        <div class="what-it-shows">
+            <h4>What you're seeing</h4>
+            <p>Earth orbits the Sun. JWST sits at the L2 Lagrange point — 1.5 million km beyond Earth, co-orbiting the Sun in lockstep. It doesn't orbit Earth; it orbits the Sun at the same period as Earth, always staying "behind" us. The small ellipse is the halo orbit around L2, designed so JWST never enters Earth's shadow (which would cut power and cause thermal shock). The small "V" is the sunshield, always pointing toward the Sun.</p>
+        </div>
+        <div class="why-it-matters">
+            <h4>So what?</h4>
+            <p>L2 is the only location that gives JWST everything it needs simultaneously: thermal stability (Sun/Earth/Moon always on the same side), full-sky access over 6 months, proximity for communication (~5 light-seconds), and minimal fuel requirements (~4.6 kg/year). The tradeoff is absolute: no human or robot can reach it for repairs. Every mechanism had to work perfectly on the first try. But the payoff is a thermal environment so stable that the telescope holds focus to nanometre precision for months — the foundation of every measurement in this entire knowledge base.</p>
+        </div>
     </div>
 </div>
 
