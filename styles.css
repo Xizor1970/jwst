@@ -241,6 +241,71 @@ section .subtitle {
     font-style: normal;
 }
 
+.big-number {
+    font-size: 3.5rem;
+    font-weight: 200;
+    color: #f0c27f;
+    font-family: 'Courier New', monospace;
+    line-height: 1.2;
+}
+.big-number .unit {
+    font-size: 1rem;
+    color: #889;
+    font-weight: 400;
+}
+.highlight-fact {
+    display: inline-block;
+    background: rgba(240, 194, 127, 0.08);
+    border: 1px solid rgba(240, 194, 127, 0.2);
+    border-radius: 4px;
+    padding: 0.2em 0.5em;
+    color: #f0c27f;
+    font-weight: 600;
+}
+.highlight-blue {
+    display: inline-block;
+    background: rgba(106, 130, 251, 0.08);
+    border: 1px solid rgba(106, 130, 251, 0.2);
+    border-radius: 4px;
+    padding: 0.2em 0.5em;
+    color: #6a82fb;
+    font-weight: 600;
+}
+.highlight-red {
+    display: inline-block;
+    background: rgba(252, 92, 125, 0.08);
+    border: 1px solid rgba(252, 92, 125, 0.2);
+    border-radius: 4px;
+    padding: 0.2em 0.5em;
+    color: #fc5c7d;
+    font-weight: 600;
+}
+.stat-inline {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+    justify-content: center;
+}
+.stat-inline .stat-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.02);
+    border-radius: 8px;
+    min-width: 140px;
+}
+.stat-inline .stat-item .value {
+    font-size: 2rem;
+    font-weight: 200;
+    color: #f0c27f;
+    font-family: 'Courier New', monospace;
+}
+.stat-inline .stat-item .label {
+    font-size: 0.8rem;
+    color: #778;
+    margin-top: 0.3rem;
+}
+
 .divider {
     height: 1px;
     background: linear-gradient(to right, transparent, rgba(240,194,127,0.3), transparent);
