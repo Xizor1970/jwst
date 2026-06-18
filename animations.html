@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Visualisations — JWST Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .viz-container {
+            margin: 3rem 0;
+            background: #0d0d14;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .viz-container canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .viz-header {
+            padding: 1.5rem 2rem 0.5rem;
+        }
+        .viz-header h3 {
+            color: #f0c27f;
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+        .viz-header p {
+            color: #667;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+        .viz-controls {
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .viz-controls label {
+            color: #889;
+            font-size: 0.85rem;
+        }
+        .viz-controls input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            outline: none;
+            width: 150px;
+        }
+        .viz-controls input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #f0c27f;
+            cursor: pointer;
+        }
+        .viz-controls button {
+            background: rgba(240, 194, 127, 0.1);
+            border: 1px solid rgba(240, 194, 127, 0.3);
+            color: #f0c27f;
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+        }
+        .viz-controls button:hover {
+            background: rgba(240, 194, 127, 0.2);
+        }
+        .viz-controls .value-display {
+            color: #f0c27f;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            min-width: 60px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-bg" style="background: radial-gradient(circle at 50% 50%, rgba(240, 194, 127, 0.05) 0%, rgba(10,10,15,0.95) 50%);"></div>
+    <div class="hero-content">
+        <h1 class="section-title">Interactive Visualisations</h1>
+        <p>Animations that bring the physics to life</p>
+    </div>
+</div>
+
+<nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="animations.html" class="active">Animations</a>
+</nav>
+
+<section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 1. REDSHIFT VISUALISATION -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<div class="viz-container">
+    <div class="viz-header">
+        <h3>Cosmological Redshift</h3>
+        <p>Watch a light wave stretch as the universe expands — UV becomes infrared</p>
+    </div>
+    <canvas id="redshift-canvas" width="1000" height="300"></canvas>
+    <div class="viz-controls">
+        <label>Redshift (z):</label>
+        <input type="range" id="redshift-slider" min="0" max="15" step="0.1" value="0">
+        <span class="value-display" id="redshift-value">z = 0</span>
+        <button id="redshift-play">Play Animation</button>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 2. TRANSIT SPECTROSCOPY -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<div class="viz-container">
+    <div class="viz-header">
+        <h3>Exoplanet Transit</h3>
+        <p>A planet crosses its star — watch the light curve dip and the atmosphere absorb specific wavelengths</p>
+    </div>
+    <canvas id="transit-canvas" width="1000" height="400"></canvas>
+    <div class="viz-controls">
+        <button id="transit-play">Start Transit</button>
+        <label>Planet size:</label>
+        <input type="range" id="transit-size" min="5" max="30" step="1" value="15">
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 3. SUNSHIELD THERMAL CASCADE -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<div class="viz-container">
+    <div class="viz-header">
+        <h3>Sunshield Thermal Cascade</h3>
+        <p>Five layers of Kapton — each one drops the temperature by radiating heat into space</p>
+    </div>
+    <canvas id="sunshield-canvas" width="1000" height="350"></canvas>
+    <div class="viz-controls">
+        <button id="sunshield-play">Animate Heat Flow</button>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 4. UP-THE-RAMP SAMPLING -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<div class="viz-container">
+    <div class="viz-header">
+        <h3>Up-the-Ramp Sampling</h3>
+        <p>Non-destructive reads detect cosmic rays as sudden jumps — and fitting the slope gives precise flux</p>
+    </div>
+    <canvas id="ramp-canvas" width="1000" height="350"></canvas>
+    <div class="viz-controls">
+        <button id="ramp-play">New Integration</button>
+        <label>Cosmic ray at read:</label>
+        <input type="range" id="ramp-cr" min="3" max="18" step="1" value="12">
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 5. GRAVITATIONAL LENSING -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<div class="viz-container">
+    <div class="viz-header">
+        <h3>Gravitational Lensing</h3>
+        <p>Move the galaxy cluster to bend light from a background source — watch arcs and multiple images form</p>
+    </div>
+    <canvas id="lensing-canvas" width="1000" height="500"></canvas>
+    <div class="viz-controls">
+        <label>Lens mass:</label>
+        <input type="range" id="lensing-mass" min="1" max="10" step="0.5" value="5">
+        <span class="value-display" id="lensing-mass-val">5 × 10¹⁴ M☉</span>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 6. MICROSHUTTER ACTUATION -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<div class="viz-container">
+    <div class="viz-header">
+        <h3>Microshutter Array Actuation</h3>
+        <p>Watch the magnet sweep open all shutters, then selective electrostatic latching holds the targets open</p>
+    </div>
+    <canvas id="shutter-canvas" width="1000" height="400"></canvas>
+    <div class="viz-controls">
+        <button id="shutter-play">Run Actuation Cycle</button>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 7. L2 ORBIT -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<div class="viz-container">
+    <div class="viz-header">
+        <h3>L2 Lagrange Point & Halo Orbit</h3>
+        <p>JWST orbits the Sun in formation with Earth, tracing a halo around L2 to avoid Earth's shadow</p>
+    </div>
+    <canvas id="orbit-canvas" width="1000" height="500"></canvas>
+    <div class="viz-controls">
+        <button id="orbit-play">Start / Pause</button>
+        <label>Speed:</label>
+        <input type="range" id="orbit-speed" min="1" max="10" step="1" value="3">
+    </div>
+</div>
+
+</section>
+
+<footer>
+    <p>All visualisations are interactive — drag sliders and click buttons to explore.</p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// UTILITY FUNCTIONS
+// ═══════════════════════════════════════════════════════════════
+
+function wavelengthToColor(nm) {
+    let r = 0, g = 0, b = 0;
+    if (nm < 380) { r = 0.4; g = 0; b = 0.4; }
+    else if (nm < 440) { r = -(nm - 440) / 60; g = 0; b = 1; }
+    else if (nm < 490) { r = 0; g = (nm - 440) / 50; b = 1; }
+    else if (nm < 510) { r = 0; g = 1; b = -(nm - 510) / 20; }
+    else if (nm < 580) { r = (nm - 510) / 70; g = 1; b = 0; }
+    else if (nm < 645) { r = 1; g = -(nm - 645) / 65; b = 0; }
+    else if (nm < 780) { r = 1; g = 0; b = 0; }
+    else { r = 0.5; g = 0; b = 0; }
+    return `rgb(${Math.round(r*255)},${Math.round(g*255)},${Math.round(b*255)})`;
+}
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+// ═══════════════════════════════════════════════════════════════
+// 1. REDSHIFT ANIMATION
+// ═══════════════════════════════════════════════════════════════
+
+(function() {
+    const canvas = document.getElementById('redshift-canvas');
+    const ctx = canvas.getContext('2d');
+    const slider = document.getElementById('redshift-slider');
+    const valueEl = document.getElementById('redshift-value');
+    const playBtn = document.getElementById('redshift-play');
+    let animating = false, animFrame = null;
+
+    function draw(z) {
+        const w = canvas.width, h = canvas.height;
+        ctx.fillStyle = '#0d0d14';
+        ctx.fillRect(0, 0, w, h);
+
+        const emittedWavelength = 100;
+        const observedWavelength = emittedWavelength * (1 + z);
+        const emittedNm = 400;
+        const observedNm = Math.min(emittedNm * (1 + z), 2000);
+        const displayNm = Math.min(observedNm, 780);
+
+        const waveY = h * 0.5;
+        const amplitude = 30;
+        const baseFreq = 0.05;
+        const stretchedFreq = baseFreq / (1 + z);
+
+        // Emitted wave (left side)
+        ctx.beginPath();
+        ctx.strokeStyle = wavelengthToColor(emittedNm);
+        ctx.lineWidth = 2.5;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = wavelengthToColor(emittedNm);
+        for (let x = 50; x < w * 0.35; x++) {
+            const y = waveY + Math.sin(x * baseFreq) * amplitude;
+            x === 50 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        // Transition zone
+        const transStart = w * 0.35, transEnd = w * 0.65;
+        for (let x = transStart; x < transEnd; x++) {
+            const t = (x - transStart) / (transEnd - transStart);
+            const freq = lerp(baseFreq, stretchedFreq, t);
+            const nm = lerp(emittedNm, displayNm, t);
+            ctx.beginPath();
+            ctx.strokeStyle = wavelengthToColor(nm);
+            ctx.lineWidth = 2.5;
+            const y1 = waveY + Math.sin(x * freq + (1-t) * x * baseFreq * 0.5) * amplitude;
+            const y2 = waveY + Math.sin((x+1) * freq + (1-t) * (x+1) * baseFreq * 0.5) * amplitude;
+            ctx.moveTo(x, y1);
+            ctx.lineTo(x + 1, y2);
+            ctx.stroke();
+        }
+
+        // Observed wave (right side)
+        ctx.beginPath();
+        const obsColor = observedNm > 780 ? '#661111' : wavelengthToColor(displayNm);
+        ctx.strokeStyle = obsColor;
+        ctx.lineWidth = 2.5;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = obsColor;
+        for (let x = transEnd; x < w - 50; x++) {
+            const y = waveY + Math.sin(x * stretchedFreq) * amplitude;
+            x === Math.floor(transEnd) ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        // Labels
+        ctx.font = '13px Georgia';
+        ctx.fillStyle = '#889';
+        ctx.textAlign = 'center';
+        ctx.fillText('Emitted (UV/Visible)', w * 0.2, h - 30);
+        ctx.fillText(`Observed (${observedNm > 780 ? 'Infrared ' + Math.round(observedNm) + ' nm' : Math.round(observedNm) + ' nm'})`, w * 0.8, h - 30);
+
+        ctx.fillStyle = '#f0c27f';
+        ctx.font = '12px Courier New';
+        ctx.fillText(`λ_obs = ${emittedNm} × (1 + ${z.toFixed(1)}) = ${Math.round(observedNm)} nm`, w * 0.5, h - 10);
+
+        // Arrow showing expansion
+        ctx.fillStyle = '#445';
+        ctx.fillText('← Universe expands → wavelength stretches →', w * 0.5, 25);
+    }
+
+    slider.addEventListener('input', () => {
+        const z = parseFloat(slider.value);
+        valueEl.textContent = `z = ${z.toFixed(1)}`;
+        draw(z);
+    });
+
+    playBtn.addEventListener('click', () => {
+        if (animating) { cancelAnimationFrame(animFrame); animating = false; playBtn.textContent = 'Play Animation'; return; }
+        animating = true;
+        playBtn.textContent = 'Pause';
+        slider.value = 0;
+        let startTime = null;
+        function animate(ts) {
+            if (!startTime) startTime = ts;
+            const elapsed = (ts - startTime) / 1000;
+            const z = Math.min(elapsed * 1.5, 15);
+            slider.value = z;
+            valueEl.textContent = `z = ${z.toFixed(1)}`;
+            draw(z);
+            if (z < 15 && animating) animFrame = requestAnimationFrame(animate);
+            else { animating = false; playBtn.textContent = 'Play Animation'; }
+        }
+        animFrame = requestAnimationFrame(animate);
+    });
+
+    draw(0);
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// 2. TRANSIT SPECTROSCOPY
+// ═══════════════════════════════════════════════════════════════
+
+(function() {
+    const canvas = document.getElementById('transit-canvas');
+    const ctx = canvas.getContext('2d');
+    const playBtn = document.getElementById('transit-play');
+    const sizeSlider = document.getElementById('transit-size');
+    let animating = false, animFrame = null, planetX = -50;
+
+    function draw() {
+        const w = canvas.width, h = canvas.height;
+        ctx.fillStyle = '#0d0d14';
+        ctx.fillRect(0, 0, w, h);
+
+        const starX = w * 0.3, starY = h * 0.4, starR = 60;
+        const planetR = parseInt(sizeSlider.value);
+
+        // Star glow
+        const grd = ctx.createRadialGradient(starX, starY, 0, starX, starY, starR * 2);
+        grd.addColorStop(0, 'rgba(255, 240, 200, 0.8)');
+        grd.addColorStop(0.3, 'rgba(255, 200, 100, 0.3)');
+        grd.addColorStop(1, 'rgba(255, 200, 100, 0)');
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(starX, starY, starR * 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Star
+        ctx.beginPath();
+        ctx.fillStyle = '#fff8e0';
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = '#ffcc44';
+        ctx.arc(starX, starY, starR, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Planet
+        const pY = starY;
+        ctx.beginPath();
+        ctx.fillStyle = '#1a1a2e';
+        ctx.arc(planetX, pY, planetR, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Atmosphere ring
+        if (Math.abs(planetX - starX) < starR + planetR + 5) {
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(100, 200, 255, 0.3)';
+            ctx.lineWidth = 3;
+            ctx.arc(planetX, pY, planetR + 4, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+
+        // Light curve
+        const lcX = w * 0.55, lcY = h * 0.15, lcW = w * 0.4, lcH = h * 0.65;
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(lcX, lcY, lcW, lcH);
+
+        ctx.font = '11px Georgia';
+        ctx.fillStyle = '#667';
+        ctx.textAlign = 'center';
+        ctx.fillText('Brightness', lcX + lcW / 2, lcY - 8);
+        ctx.fillText('Time →', lcX + lcW / 2, lcY + lcH + 18);
+
+        // Draw light curve
+        ctx.beginPath();
+        ctx.strokeStyle = '#f0c27f';
+        ctx.lineWidth = 2;
+        const transitStart = starX - starR - planetR;
+        const transitEnd = starX + starR + planetR;
+        const totalPath = w + 100;
+
+        for (let i = 0; i <= lcW; i++) {
+            const simX = (i / lcW) * totalPath - 50;
+            let brightness = 1.0;
+            if (simX > transitStart && simX < transitEnd) {
+                const dist = Math.abs(simX - starX);
+                const overlap = Math.max(0, Math.min(1, (starR + planetR - dist) / (2 * planetR)));
+                brightness = 1.0 - overlap * (planetR * planetR) / (starR * starR);
+            }
+            const y = lcY + lcH * 0.1 + (1 - brightness) * lcH * 3;
+            i === 0 ? ctx.moveTo(lcX + i, y) : ctx.lineTo(lcX + i, y);
+        }
+        ctx.stroke();
+
+        // Current position marker
+        const markerI = ((planetX + 50) / totalPath) * lcW;
+        if (markerI > 0 && markerI < lcW) {
+            ctx.beginPath();
+            ctx.fillStyle = '#fc5c7d';
+            ctx.arc(lcX + markerI, lcY + lcH * 0.1, 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Adjust for current transit depth
+            const dist = Math.abs(planetX - starX);
+            const overlap = Math.max(0, Math.min(1, (starR + planetR - dist) / (2 * planetR)));
+            const brightness = 1.0 - overlap * (planetR * planetR) / (starR * starR);
+            const markerY = lcY + lcH * 0.1 + (1 - brightness) * lcH * 3;
+            ctx.beginPath();
+            ctx.fillStyle = '#fc5c7d';
+            ctx.arc(lcX + markerI, markerY, 4, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Depth annotation
+        const depth = ((planetR * planetR) / (starR * starR) * 1e6).toFixed(0);
+        ctx.fillStyle = '#fc5c7d';
+        ctx.font = '12px Courier New';
+        ctx.textAlign = 'left';
+        ctx.fillText(`Transit depth: ${depth} ppm`, lcX + 10, lcY + lcH - 10);
+    }
+
+    playBtn.addEventListener('click', () => {
+        if (animating) { cancelAnimationFrame(animFrame); animating = false; playBtn.textContent = 'Start Transit'; return; }
+        animating = true;
+        playBtn.textContent = 'Pause';
+        planetX = -50;
+        function animate() {
+            planetX += 1.5;
+            if (planetX > canvas.width + 50) { animating = false; playBtn.textContent = 'Start Transit'; return; }
+            draw();
+            if (animating) animFrame = requestAnimationFrame(animate);
+        }
+        animFrame = requestAnimationFrame(animate);
+    });
+
+    sizeSlider.addEventListener('input', draw);
+    draw();
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// 3. SUNSHIELD THERMAL CASCADE
+// ═══════════════════════════════════════════════════════════════
+
+(function() {
+    const canvas = document.getElementById('sunshield-canvas');
+    const ctx = canvas.getContext('2d');
+    const playBtn = document.getElementById('sunshield-play');
+    const temps = [383, 253, 183, 133, 50];
+    let animProgress = 1, animating = false, animFrame = null;
+
+    function tempToColor(t) {
+        if (t > 300) return `rgb(255, ${Math.round(150 - (t-300)*0.5)}, 50)`;
+        if (t > 200) return `rgb(${Math.round(200 + (t-200)*0.55)}, ${Math.round(100 + (t-200)*0.5)}, 50)`;
+        if (t > 100) return `rgb(${Math.round(100 + (t-100))}, ${Math.round(100 + (t-100)*0.5)}, ${Math.round(150 + (t-100)*0.5)})`;
+        return `rgb(${Math.round(30 + t*0.7)}, ${Math.round(40 + t*0.6)}, ${Math.round(120 + t*1.3)})`;
+    }
+
+    function draw(progress) {
+        const w = canvas.width, h = canvas.height;
+        ctx.fillStyle = '#0d0d14';
+        ctx.fillRect(0, 0, w, h);
+
+        // Sun
+        const sunGrd = ctx.createRadialGradient(30, h/2, 0, 30, h/2, 80);
+        sunGrd.addColorStop(0, 'rgba(255,200,50,0.8)');
+        sunGrd.addColorStop(1, 'rgba(255,200,50,0)');
+        ctx.fillStyle = sunGrd;
+        ctx.beginPath();
+        ctx.arc(30, h/2, 80, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#ffdd44';
+        ctx.font = '11px Georgia';
+        ctx.textAlign = 'center';
+        ctx.fillText('Sun', 30, h/2 + 100);
+        ctx.fillText('1360 W/m²', 30, h/2 + 115);
+
+        // Layers
+        const startX = 150, gap = 130, layerH = 200;
+        for (let i = 0; i < 5; i++) {
+            const x = startX + i * gap;
+            const layerProgress = Math.max(0, Math.min(1, (progress * 5) - i));
+            const temp = lerp(383, temps[i], layerProgress);
+            const color = tempToColor(temp);
+
+            // Layer line
+            ctx.beginPath();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = color;
+            ctx.moveTo(x, (h - layerH) / 2);
+            ctx.lineTo(x, (h + layerH) / 2);
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+
+            // Temperature label
+            ctx.fillStyle = color;
+            ctx.font = '13px Courier New';
+            ctx.textAlign = 'center';
+            ctx.fillText(`${Math.round(temp)} K`, x, (h + layerH) / 2 + 25);
+            ctx.fillStyle = '#556';
+            ctx.font = '10px Georgia';
+            ctx.fillText(`Layer ${i + 1}`, x, (h - layerH) / 2 - 15);
+
+            // Radiation arrows between layers
+            if (i < 4 && layerProgress > 0.5) {
+                const nextX = x + gap;
+                ctx.beginPath();
+                ctx.strokeStyle = `rgba(255, 150, 50, ${0.3 * (1 - i/5)})`;
+                ctx.lineWidth = 1;
+                ctx.setLineDash([4, 4]);
+                for (let a = 0; a < 3; a++) {
+                    const ay = (h - layerH)/2 + 30 + a * 70;
+                    ctx.moveTo(x + 5, ay);
+                    ctx.lineTo(nextX - 5, ay + 10);
+                }
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+        }
+
+        // Cold side label
+        ctx.fillStyle = '#6a82fb';
+        ctx.font = '12px Georgia';
+        ctx.textAlign = 'left';
+        ctx.fillText('Telescope side', startX + 4 * gap + 30, h/2 - 10);
+        ctx.fillText('< 1 mW/m²', startX + 4 * gap + 30, h/2 + 10);
+
+        // SPF label
+        ctx.fillStyle = '#889';
+        ctx.font = '11px Georgia';
+        ctx.textAlign = 'center';
+        ctx.fillText('Sun Protection Factor: 1,000,000×', w/2, h - 15);
+    }
+
+    playBtn.addEventListener('click', () => {
+        if (animating) { cancelAnimationFrame(animFrame); animating = false; return; }
+        animating = true;
+        animProgress = 0;
+        function animate() {
+            animProgress += 0.008;
+            if (animProgress > 1) { animProgress = 1; animating = false; }
+            draw(animProgress);
+            if (animating) animFrame = requestAnimationFrame(animate);
+        }
+        animFrame = requestAnimationFrame(animate);
+    });
+
+    draw(1);
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// 4. UP-THE-RAMP SAMPLING
+// ═══════════════════════════════════════════════════════════════
+
+(function() {
+    const canvas = document.getElementById('ramp-canvas');
+    const ctx = canvas.getContext('2d');
+    const playBtn = document.getElementById('ramp-play');
+    const crSlider = document.getElementById('ramp-cr');
+    let reads = [], animating = false, animFrame = null, currentRead = 0;
+
+    function generateReads() {
+        reads = [];
+        const slope = 2 + Math.random() * 3;
+        const crAt = parseInt(crSlider.value);
+        let accumulated = 10 + Math.random() * 5;
+        for (let i = 0; i < 20; i++) {
+            accumulated += slope + (Math.random() - 0.5) * 0.8;
+            if (i === crAt) accumulated += 15 + Math.random() * 10;
+            reads.push(accumulated);
+        }
+    }
+
+    function draw(numVisible) {
+        const w = canvas.width, h = canvas.height;
+        ctx.fillStyle = '#0d0d14';
+        ctx.fillRect(0, 0, w, h);
+
+        const margin = { l: 80, r: 40, t: 40, b: 50 };
+        const plotW = w - margin.l - margin.r;
+        const plotH = h - margin.t - margin.b;
+        const crAt = parseInt(crSlider.value);
+
+        // Axes
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(margin.l, margin.t);
+        ctx.lineTo(margin.l, margin.t + plotH);
+        ctx.lineTo(margin.l + plotW, margin.t + plotH);
+        ctx.stroke();
+
+        ctx.fillStyle = '#667';
+        ctx.font = '11px Georgia';
+        ctx.textAlign = 'center';
+        ctx.fillText('Read number →', margin.l + plotW / 2, h - 10);
+        ctx.save();
+        ctx.translate(20, margin.t + plotH / 2);
+        ctx.rotate(-Math.PI / 2);
+        ctx.fillText('Accumulated charge (e⁻)', 0, 0);
+        ctx.restore();
+
+        if (reads.length === 0) return;
+
+        const maxVal = Math.max(...reads) * 1.1;
+        const xStep = plotW / 20;
+
+        // Plot points
+        for (let i = 0; i < Math.min(numVisible, reads.length); i++) {
+            const x = margin.l + (i + 1) * xStep;
+            const y = margin.t + plotH - (reads[i] / maxVal) * plotH;
+
+            ctx.beginPath();
+            const isCR = i === crAt;
+            ctx.fillStyle = isCR ? '#fc5c7d' : '#f0c27f';
+            ctx.shadowBlur = isCR ? 12 : 6;
+            ctx.shadowColor = isCR ? '#fc5c7d' : '#f0c27f';
+            ctx.arc(x, y, isCR ? 5 : 3.5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+
+        // Fit line (excluding CR)
+        if (numVisible > 3) {
+            const validReads = [];
+            for (let i = 0; i < Math.min(numVisible, reads.length); i++) {
+                if (i !== crAt || numVisible <= crAt) validReads.push({ x: i, y: reads[i] });
+            }
+            // Simple least-squares
+            let sx = 0, sy = 0, sxy = 0, sxx = 0, n = validReads.length;
+            for (const p of validReads) { sx += p.x; sy += p.y; sxy += p.x * p.y; sxx += p.x * p.x; }
+            const slope = (n * sxy - sx * sy) / (n * sxx - sx * sx);
+            const intercept = (sy - slope * sx) / n;
+
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(106, 130, 251, 0.7)';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([6, 4]);
+            const y0 = margin.t + plotH - ((intercept + slope * 0) / maxVal) * plotH;
+            const y19 = margin.t + plotH - ((intercept + slope * 19) / maxVal) * plotH;
+            ctx.moveTo(margin.l + xStep, y0);
+            ctx.lineTo(margin.l + 20 * xStep, y19);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Label
+            ctx.fillStyle = '#6a82fb';
+            ctx.font = '12px Courier New';
+            ctx.textAlign = 'right';
+            ctx.fillText(`Fitted slope: ${slope.toFixed(2)} e⁻/read`, w - margin.r - 10, margin.t + 20);
+        }
+
+        // CR label
+        if (numVisible > crAt) {
+            const crX = margin.l + (crAt + 1) * xStep;
+            const crY = margin.t + plotH - (reads[crAt] / maxVal) * plotH;
+            ctx.fillStyle = '#fc5c7d';
+            ctx.font = '11px Georgia';
+            ctx.textAlign = 'left';
+            ctx.fillText('Cosmic ray!', crX + 10, crY - 5);
+            ctx.fillText('(rejected from fit)', crX + 10, crY + 12);
+        }
+    }
+
+    playBtn.addEventListener('click', () => {
+        if (animating) { cancelAnimationFrame(animFrame); animating = false; return; }
+        generateReads();
+        currentRead = 0;
+        animating = true;
+        function animate() {
+            currentRead += 0.15;
+            draw(Math.floor(currentRead));
+            if (currentRead < 20 && animating) animFrame = requestAnimationFrame(animate);
+            else animating = false;
+        }
+        animFrame = requestAnimationFrame(animate);
+    });
+
+    crSlider.addEventListener('input', () => { generateReads(); draw(20); });
+    generateReads();
+    draw(20);
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// 5. GRAVITATIONAL LENSING
+// ═══════════════════════════════════════════════════════════════
+
+(function() {
+    const canvas = document.getElementById('lensing-canvas');
+    const ctx = canvas.getContext('2d');
+    const massSlider = document.getElementById('lensing-mass');
+    const massVal = document.getElementById('lensing-mass-val');
+    let mouseX = canvas.width / 2, mouseY = canvas.height / 2;
+
+    function draw() {
+        const w = canvas.width, h = canvas.height;
+        ctx.fillStyle = '#0d0d14';
+        ctx.fillRect(0, 0, w, h);
+
+        const mass = parseFloat(massSlider.value);
+        const einsteinR = mass * 18;
+        const lensX = mouseX, lensY = mouseY;
+
+        // Background source grid (simulated distant galaxies)
+        const sources = [
+            { x: w * 0.5, y: h * 0.5, r: 8, color: '#4488ff' },
+            { x: w * 0.35, y: h * 0.3, r: 5, color: '#88ccff' },
+            { x: w * 0.6, y: h * 0.7, r: 6, color: '#aaddff' },
+            { x: w * 0.45, y: h * 0.6, r: 4, color: '#66aaff' },
+            { x: w * 0.55, y: h * 0.35, r: 5, color: '#99bbff' },
+        ];
+
+        // Draw lensed images of each source
+        for (const src of sources) {
+            const dx = src.x - lensX, dy = src.y - lensY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 5) {
+                // Einstein ring
+                ctx.beginPath();
+                ctx.strokeStyle = src.color;
+                ctx.lineWidth = 3;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = src.color;
+                ctx.arc(lensX, lensY, einsteinR, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+            } else {
+                const theta = Math.atan2(dy, dx);
+                const eR2 = einsteinR * einsteinR;
+
+                // Two images: one outside Einstein radius, one inside
+                const r1 = (dist + Math.sqrt(dist * dist + 4 * eR2)) / 2;
+                const r2 = (dist - Math.sqrt(dist * dist + 4 * eR2)) / 2;
+                const mag1 = Math.abs(r1 / dist);
+                const mag2 = Math.abs(r2 / dist);
+
+                // Image 1 (outside)
+                const x1 = lensX + r1 * Math.cos(theta);
+                const y1 = lensY + r1 * Math.sin(theta);
+                const size1 = Math.min(src.r * Math.sqrt(mag1), 25);
+                ctx.beginPath();
+                ctx.fillStyle = src.color;
+                ctx.shadowBlur = 6;
+                ctx.shadowColor = src.color;
+                ctx.ellipse(x1, y1, size1, size1 * 0.6, theta + Math.PI/2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                // Image 2 (inside, inverted)
+                if (Math.abs(r2) > 5) {
+                    const x2 = lensX + r2 * Math.cos(theta);
+                    const y2 = lensY + r2 * Math.sin(theta);
+                    const size2 = Math.min(src.r * Math.sqrt(mag2), 20);
+                    ctx.beginPath();
+                    ctx.fillStyle = src.color;
+                    ctx.globalAlpha = 0.6;
+                    ctx.ellipse(x2, y2, size2, size2 * 0.5, theta + Math.PI/2, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+                }
+            }
+        }
+
+        // Lens (galaxy cluster)
+        ctx.beginPath();
+        const lensGrd = ctx.createRadialGradient(lensX, lensY, 0, lensX, lensY, 30);
+        lensGrd.addColorStop(0, 'rgba(255, 200, 100, 0.4)');
+        lensGrd.addColorStop(1, 'rgba(255, 200, 100, 0)');
+        ctx.fillStyle = lensGrd;
+        ctx.arc(lensX, lensY, 30, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Einstein radius indicator
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(240, 194, 127, 0.15)';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 4]);
+        ctx.arc(lensX, lensY, einsteinR, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Labels
+        ctx.fillStyle = '#667';
+        ctx.font = '11px Georgia';
+        ctx.textAlign = 'center';
+        ctx.fillText('Move mouse over canvas to reposition the lens', w / 2, h - 15);
+        ctx.fillStyle = '#f0c27f';
+        ctx.fillText('Galaxy cluster (lens)', lensX, lensY + 45);
+    }
+
+    canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = (e.clientX - rect.left) * (canvas.width / rect.width);
+        mouseY = (e.clientY - rect.top) * (canvas.height / rect.height);
+        draw();
+    });
+
+    massSlider.addEventListener('input', () => {
+        massVal.textContent = `${massSlider.value} × 10¹⁴ M☉`;
+        draw();
+    });
+
+    draw();
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// 6. MICROSHUTTER ACTUATION
+// ═══════════════════════════════════════════════════════════════
+
+(function() {
+    const canvas = document.getElementById('shutter-canvas');
+    const ctx = canvas.getContext('2d');
+    const playBtn = document.getElementById('shutter-play');
+    const COLS = 30, ROWS = 15;
+    let shutterState = []; // 0=closed, 1=open
+    let targetState = [];
+    let magnetPos = -1;
+    let phase = 'idle'; // idle, opening, latching, closing
+    let animFrame = null;
+
+    // Generate random "galaxy targets"
+    function generateTargets() {
+        targetState = [];
+        for (let i = 0; i < ROWS * COLS; i++) {
+            targetState.push(Math.random() < 0.08 ? 1 : 0);
+        }
+    }
+
+    function draw() {
+        const w = canvas.width, h = canvas.height;
+        ctx.fillStyle = '#0d0d14';
+        ctx.fillRect(0, 0, w, h);
+
+        const margin = 40;
+        const cellW = (w - margin * 2) / COLS;
+        const cellH = (h - margin * 2 - 40) / ROWS;
+
+        for (let r = 0; r < ROWS; r++) {
+            for (let c = 0; c < COLS; c++) {
+                const idx = r * COLS + c;
+                const x = margin + c * cellW;
+                const y = margin + r * cellH;
+                const isOpen = shutterState[idx];
+                const isTarget = targetState[idx];
+
+                if (isOpen) {
+                    // Open shutter - show "sky" behind
+                    ctx.fillStyle = isTarget ? 'rgba(100, 180, 255, 0.6)' : 'rgba(20, 20, 40, 0.8)';
+                    ctx.fillRect(x + 1, y + 1, cellW - 2, cellH - 2);
+                    if (isTarget) {
+                        ctx.beginPath();
+                        ctx.fillStyle = '#aaddff';
+                        ctx.arc(x + cellW/2, y + cellH/2, 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                } else {
+                    // Closed shutter
+                    ctx.fillStyle = '#1a1a24';
+                    ctx.fillRect(x + 1, y + 1, cellW - 2, cellH - 2);
+                    ctx.strokeStyle = '#2a2a34';
+                    ctx.lineWidth = 0.5;
+                    ctx.strokeRect(x + 1, y + 1, cellW - 2, cellH - 2);
+                }
+            }
+        }
+
+        // Magnet indicator
+        if (magnetPos >= 0 && magnetPos <= COLS) {
+            const mx = margin + magnetPos * cellW;
+            ctx.beginPath();
+            ctx.strokeStyle = '#fc5c7d';
+            ctx.lineWidth = 3;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#fc5c7d';
+            ctx.moveTo(mx, margin - 10);
+            ctx.lineTo(mx, margin + ROWS * cellH + 10);
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+
+            ctx.fillStyle = '#fc5c7d';
+            ctx.font = '11px Courier New';
+            ctx.textAlign = 'center';
+            ctx.fillText('MAGNET', mx, margin - 18);
+        }
+
+        // Phase label
+        ctx.fillStyle = '#889';
+        ctx.font = '12px Georgia';
+        ctx.textAlign = 'center';
+        const phaseLabel = {
+            'idle': 'Ready — click to start actuation cycle',
+            'opening': 'Phase 1: Magnet sweep → opening ALL shutters',
+            'latching': 'Phase 2: Electrostatic latch applied to targets',
+            'closing': 'Phase 3: Magnet return → unlocked shutters close'
+        }[phase];
+        ctx.fillText(phaseLabel, w / 2, h - 12);
+    }
+
+    function runCycle() {
+        generateTargets();
+        shutterState = new Array(ROWS * COLS).fill(0);
+        phase = 'opening';
+        magnetPos = 0;
+
+        function animateOpen() {
+            if (magnetPos > COLS) {
+                phase = 'latching';
+                setTimeout(animateClose, 600);
+                draw();
+                return;
+            }
+            // Open column by column
+            for (let r = 0; r < ROWS; r++) {
+                const idx = r * COLS + Math.floor(magnetPos);
+                if (idx < ROWS * COLS) shutterState[idx] = 1;
+            }
+            magnetPos += 0.5;
+            draw();
+            animFrame = requestAnimationFrame(animateOpen);
+        }
+
+        function animateClose() {
+            phase = 'closing';
+            magnetPos = COLS;
+
+            function closeStep() {
+                if (magnetPos < 0) {
+                    phase = 'idle';
+                    magnetPos = -1;
+                    draw();
+                    return;
+                }
+                const col = Math.floor(magnetPos);
+                for (let r = 0; r < ROWS; r++) {
+                    const idx = r * COLS + col;
+                    if (idx < ROWS * COLS && !targetState[idx]) {
+                        shutterState[idx] = 0;
+                    }
+                }
+                magnetPos -= 0.5;
+                draw();
+                animFrame = requestAnimationFrame(closeStep);
+            }
+            animFrame = requestAnimationFrame(closeStep);
+        }
+
+        animFrame = requestAnimationFrame(animateOpen);
+    }
+
+    playBtn.addEventListener('click', runCycle);
+    generateTargets();
+    shutterState = new Array(ROWS * COLS).fill(0);
+    draw();
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// 7. L2 ORBIT
+// ═══════════════════════════════════════════════════════════════
+
+(function() {
+    const canvas = document.getElementById('orbit-canvas');
+    const ctx = canvas.getContext('2d');
+    const playBtn = document.getElementById('orbit-play');
+    const speedSlider = document.getElementById('orbit-speed');
+    let running = true, animFrame = null, time = 0;
+
+    function draw() {
+        const w = canvas.width, h = canvas.height;
+        ctx.fillStyle = '#0a0a0f';
+        ctx.fillRect(0, 0, w, h);
+
+        const cx = w * 0.35, cy = h * 0.5;
+        const earthOrbitR = 180;
+        const speed = parseInt(speedSlider.value);
+
+        // Sun
+        ctx.beginPath();
+        const sunGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 30);
+        sunGrd.addColorStop(0, '#ffee88');
+        sunGrd.addColorStop(1, 'rgba(255, 200, 50, 0)');
+        ctx.fillStyle = sunGrd;
+        ctx.arc(cx, cy, 30, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.fillStyle = '#ffdd44';
+        ctx.arc(cx, cy, 12, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Earth orbit
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(100, 150, 255, 0.15)';
+        ctx.lineWidth = 1;
+        ctx.arc(cx, cy, earthOrbitR, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Earth position
+        const earthAngle = time * 0.01 * speed;
+        const earthX = cx + earthOrbitR * Math.cos(earthAngle);
+        const earthY = cy + earthOrbitR * Math.sin(earthAngle);
+
+        ctx.beginPath();
+        ctx.fillStyle = '#4488ff';
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#4488ff';
+        ctx.arc(earthX, earthY, 8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // L2 point (1% further from Sun than Earth)
+        const l2Dist = earthOrbitR * 1.01;
+        const l2X = cx + l2Dist * Math.cos(earthAngle);
+        const l2Y = cy + l2Dist * Math.sin(earthAngle);
+
+        // JWST halo orbit around L2
+        const haloR = 25;
+        const haloAngle = time * 0.02 * speed;
+        const haloOffX = haloR * Math.cos(haloAngle);
+        const haloOffY = haloR * Math.sin(haloAngle) * 0.4; // Elliptical
+
+        const jwstX = l2X + haloOffX * Math.cos(earthAngle + Math.PI/2) - haloOffY * Math.sin(earthAngle + Math.PI/2);
+        const jwstY = l2Y + haloOffX * Math.sin(earthAngle + Math.PI/2) + haloOffY * Math.cos(earthAngle + Math.PI/2);
+
+        // L2 marker
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(240, 194, 127, 0.3)';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([3, 3]);
+        ctx.arc(l2X, l2Y, haloR + 5, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // JWST trail
+        ctx.beginPath();
+        ctx.fillStyle = '#f0c27f';
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = '#f0c27f';
+        ctx.arc(jwstX, jwstY, 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Sunshield direction (always facing sun)
+        const toSunAngle = Math.atan2(cy - jwstY, cx - jwstX);
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(240, 194, 127, 0.4)';
+        ctx.lineWidth = 1.5;
+        ctx.moveTo(jwstX + Math.cos(toSunAngle + 0.4) * 12, jwstY + Math.sin(toSunAngle + 0.4) * 12);
+        ctx.lineTo(jwstX + Math.cos(toSunAngle) * 18, jwstY + Math.sin(toSunAngle) * 18);
+        ctx.lineTo(jwstX + Math.cos(toSunAngle - 0.4) * 12, jwstY + Math.sin(toSunAngle - 0.4) * 12);
+        ctx.stroke();
+
+        // Labels
+        ctx.fillStyle = '#889';
+        ctx.font = '11px Georgia';
+        ctx.textAlign = 'center';
+        ctx.fillText('Sun', cx, cy + 50);
+        ctx.fillStyle = '#4488ff';
+        ctx.fillText('Earth', earthX, earthY + 22);
+        ctx.fillStyle = '#f0c27f';
+        ctx.fillText('JWST', jwstX, jwstY - 14);
+
+        // Info panel (right side)
+        ctx.fillStyle = '#667';
+        ctx.font = '12px Georgia';
+        ctx.textAlign = 'left';
+        const infoX = w * 0.7, infoY = 60;
+        ctx.fillStyle = '#f0c27f';
+        ctx.fillText('L2 Lagrange Point', infoX, infoY);
+        ctx.fillStyle = '#aab';
+        ctx.font = '11px Georgia';
+        ctx.fillText('• 1.5 million km from Earth', infoX, infoY + 25);
+        ctx.fillText('• 4× the Moon\'s distance', infoX, infoY + 45);
+        ctx.fillText('• Co-orbits Sun with Earth', infoX, infoY + 65);
+        ctx.fillText('• Halo orbit avoids Earth\'s shadow', infoX, infoY + 85);
+        ctx.fillText('• Sunshield always faces Sun', infoX, infoY + 105);
+
+        ctx.fillStyle = '#556';
+        ctx.font = '10px Courier New';
+        ctx.fillText('Not to scale — L2 is 1% beyond Earth orbit', infoX, infoY + 140);
+
+        time++;
+    }
+
+    function animate() {
+        if (running) {
+            draw();
+            animFrame = requestAnimationFrame(animate);
+        }
+    }
+
+    playBtn.addEventListener('click', () => {
+        running = !running;
+        playBtn.textContent = running ? 'Pause' : 'Start';
+        if (running) animate();
+    });
+
+    animate();
+})();
+
+</script>
+
+</body>
+</html>
