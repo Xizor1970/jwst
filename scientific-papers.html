@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Papers — JWST Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 200;
+            color: #f0c27f;
+            font-family: 'Courier New', monospace;
+        }
+        .stat-card .label {
+            font-size: 0.85rem;
+            color: #889;
+            margin-top: 0.5rem;
+        }
+        .papers-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.85rem;
+        }
+        .papers-table th {
+            text-align: left;
+            padding: 0.8rem 0.6rem;
+            border-bottom: 1px solid rgba(240, 194, 127, 0.3);
+            color: #f0c27f;
+            font-weight: 400;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .papers-table td {
+            padding: 0.7rem 0.6rem;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            color: #aab;
+            vertical-align: top;
+        }
+        .papers-table tr:hover td {
+            background: rgba(255,255,255,0.02);
+        }
+        .papers-table .rank {
+            color: #556;
+            font-family: 'Courier New', monospace;
+            width: 30px;
+        }
+        .papers-table .citations {
+            color: #f0c27f;
+            font-family: 'Courier New', monospace;
+            text-align: right;
+            white-space: nowrap;
+        }
+        .papers-table a {
+            color: #6a82fb;
+            text-decoration: none;
+        }
+        .papers-table a:hover {
+            text-decoration: underline;
+        }
+        .papers-table .description {
+            color: #778;
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+        .growth-bar {
+            display: flex;
+            align-items: flex-end;
+            gap: 0.5rem;
+            height: 150px;
+            margin: 2rem 0;
+            padding: 0 1rem;
+        }
+        .growth-bar .bar-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .growth-bar .bar {
+            width: 100%;
+            max-width: 80px;
+            background: linear-gradient(to top, rgba(240, 194, 127, 0.3), rgba(240, 194, 127, 0.8));
+            border-radius: 4px 4px 0 0;
+            transition: height 0.5s;
+        }
+        .growth-bar .bar-label {
+            font-size: 0.75rem;
+            color: #667;
+        }
+        .growth-bar .bar-value {
+            font-size: 0.8rem;
+            color: #f0c27f;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-bg" style="background: radial-gradient(circle at 50% 50%, rgba(106, 130, 251, 0.08) 0%, rgba(10,10,15,0.95) 50%);"></div>
+    <div class="hero-content">
+        <h1 class="section-title">Scientific Papers</h1>
+        <p>Producing knowledge faster than any telescope in history</p>
+    </div>
+</div>
+
+<nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="deep-past.html">The Deep Past</a>
+    <a href="exoplanets.html">Exoplanets</a>
+    <a href="stellar-nurseries.html">Stellar Nurseries</a>
+    <a href="stellar-death.html">Stellar Death</a>
+    <a href="black-holes.html">Black Holes</a>
+    <a href="solar-system.html">Solar System</a>
+    <a href="gravitational-lensing.html">Lensing</a>
+    <a href="cosmic-web.html">Cosmic Web</a>
+    <a href="cosmological-tensions.html">Tensions</a>
+    <a href="engineering.html">Engineering</a>
+    <a href="dsp.html">Signal Processing</a>
+    <a href="materials.html">Materials</a>
+    <a href="false-colour.html">Colour</a>
+    <a href="orbital-mechanics.html">L2 Orbit</a>
+    <a href="politics.html">Politics & Money</a>
+    <a href="scientific-papers.html" class="active">Papers</a>
+    <a href="future.html">What's Next</a>
+</nav>
+
+<section>
+    <h2>A Firehose of Discovery</h2>
+    <p class="subtitle">JWST is generating peer-reviewed science at 5.7× the rate Hubble achieved at the same age</p>
+
+    <div class="stat-grid">
+        <div class="stat-card">
+            <div class="number">2,236</div>
+            <div class="label">Peer-reviewed papers<br>(through 2025)</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">~85</div>
+            <div class="label">Papers per month<br>(2025 rate)</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">95,343</div>
+            <div class="label">Total citations<br>accumulated</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">7,085</div>
+            <div class="label">Unique authors<br>across all papers</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">5.7×</div>
+            <div class="label">More papers than Hubble<br>at same mission age</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">43</div>
+            <div class="label">Average citations<br>per paper</div>
+        </div>
+    </div>
+
+    <div class="explanation">
+        <h4>The steepest publication curve of any space mission</h4>
+        <p>According to STScI's bibliometric analysis, "the rapid rise of papers that analyse JWST data is steeper than for any other mission hosted by MAST." For context: Hubble didn't reach 1,000 papers per year until 15 years into its mission. JWST crossed that threshold in just its third full year of operations.</p>
+        <p>The Early Release Science (ERS) programmes were extraordinarily productive — a median of 18 papers and 586 citations per programme. These deliberately open-access datasets allowed the entire community to learn the telescope's capabilities simultaneously, creating a wave of parallel discovery.</p>
+    </div>
+
+    <div class="growth-bar">
+        <div class="bar-group">
+            <div class="bar-value">51</div>
+            <div class="bar" style="height: 7%;"></div>
+            <div class="bar-label">2022</div>
+        </div>
+        <div class="bar-group">
+            <div class="bar-value">395</div>
+            <div class="bar" style="height: 38%;"></div>
+            <div class="bar-label">2023</div>
+        </div>
+        <div class="bar-group">
+            <div class="bar-value">763</div>
+            <div class="bar" style="height: 74%;"></div>
+            <div class="bar-label">2024</div>
+        </div>
+        <div class="bar-group">
+            <div class="bar-value">1,027</div>
+            <div class="bar" style="height: 100%;"></div>
+            <div class="bar-label">2025</div>
+        </div>
+    </div>
+
+    <div class="analogy">
+        <strong>Publication velocity:</strong> At 85 papers per month, JWST produces roughly 3 new peer-reviewed scientific discoveries every single day — weekends and holidays included. Each one has passed through months of analysis, peer review, and revision. The telescope generates data faster than the global astronomical community can fully analyse it. Archival discoveries from JWST data will continue for decades.
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>Where the Science Lands</h2>
+
+    <div class="explanation">
+        <h4>Breakdown by topic</h4>
+        <p><strong>Galaxies & cosmology (~58%):</strong> The dominant science area — early galaxy formation, luminosity functions, cosmic star formation history, galaxy morphology, and large-scale structure. This is what JWST was primarily designed for.</p>
+        <p><strong>Stellar physics (~13%):</strong> Star formation, stellar populations, resolved stars in nearby galaxies, supernova remnants, planetary nebulae.</p>
+        <p><strong>Exoplanets & planet formation (~8%):</strong> Atmospheric characterisation, protoplanetary disks, transit spectroscopy. Small percentage but highest public impact.</p>
+        <p><strong>Supermassive black holes & AGN (~3.5%):</strong> The "Little Red Dots," early quasars, direct collapse candidates. Growing rapidly.</p>
+        <p><strong>Solar system (~2%):</strong> Jupiter, Saturn, ice giants, ocean moons, asteroids. Small but high-impact discoveries.</p>
+        <p><strong>Instrumentation & methods (~15%):</strong> Calibration papers, pipeline descriptions, novel techniques.</p>
+    </div>
+
+    <div class="explanation">
+        <h4>By instrument</h4>
+        <p><strong>NIRCam:</strong> 1,310 papers — the workhorse. Deep imaging, galaxy surveys, photometric redshifts.<br>
+        <strong>NIRSpec:</strong> 908 papers — the spectroscopic powerhouse. Redshift confirmation, atmospheric chemistry, emission lines.<br>
+        <strong>MIRI:</strong> 752 papers — mid-infrared. Dust emission, AGN, cool objects, solar system.<br>
+        <strong>NIRISS:</strong> 195 papers — slitless spectroscopy and aperture masking. Exoplanet transits, wide-field spectra.</p>
+    </div>
+
+    <div class="analogy">
+        <strong>The knowledge multiplier:</strong> JWST cost $9.7 billion. At 2,236 papers, that's ~$4.3 million per paper — expensive, but each paper spawns further research, graduate theses, new proposals, instrument development, and textbook revisions. The Hubble Space Telescope has generated >19,000 papers over 35 years and is estimated to have returned $2.50 in economic value for every $1 invested. JWST's trajectory suggests it will exceed Hubble's total output in less than half the time.
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>Top 50 Most-Cited JWST Papers</h2>
+    <p class="subtitle">The papers that reshaped our understanding — ranked by citation count</p>
+
+    <div class="explanation">
+        <h4>How to read this table</h4>
+        <p>Each link goes to NASA's Astrophysics Data System (ADS) — the definitive archive for astronomy papers. From there you can access the full text, citation history, and related papers. Citation counts are approximate (mid-2026 estimates). Click any title to read the paper.</p>
+    </div>
+
+    <table class="papers-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Paper</th>
+                <th>Year</th>
+                <th style="text-align:right">Citations</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="rank">1</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023PASP..135d8001R/abstract">The Science Performance of JWST as Characterized in Commissioning</a><br>
+                    Rigby, J. et al. — PASP<br>
+                    <span class="description">Comprehensive characterisation showing JWST exceeded all performance expectations</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~1,100</td>
+            </tr>
+            <tr>
+                <td class="rank">2</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...936L..14P/abstract">The JWST Early Release Observations</a><br>
+                    Pontoppidan, K. et al. — ApJL<br>
+                    <span class="description">Overview of the first public data: SMACS 0723, Stephan's Quintet, Carina Nebula, Southern Ring</span>
+                </td>
+                <td>2022</td>
+                <td class="citations">~800</td>
+            </tr>
+            <tr>
+                <td class="rank">3</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023PASP..135f8001G/abstract">The James Webb Space Telescope Mission</a><br>
+                    Gardner, J. et al. — PASP<br>
+                    <span class="description">Comprehensive mission overview: design, development, and capabilities</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~750</td>
+            </tr>
+            <tr>
+                <td class="rank">4</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023Natur.614..649J/abstract">Identification of carbon dioxide in an exoplanet atmosphere</a><br>
+                    JWST Transiting Exoplanet Community ERS Team — Nature<br>
+                    <span class="description">First definitive detection of CO₂ in an exoplanet atmosphere (WASP-39b)</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~700</td>
+            </tr>
+            <tr>
+                <td class="rank">5</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023Natur.616..266L/abstract">A population of red candidate massive galaxies ~600 Myr after the Big Bang</a><br>
+                    Labbé, I. et al. — Nature<br>
+                    <span class="description">The "impossible early galaxies" paper that shocked cosmology</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~650</td>
+            </tr>
+            <tr>
+                <td class="rank">6</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023NatAs...7..611R/abstract">Identification and properties of intense star-forming galaxies at z > 10</a><br>
+                    Robertson, B. et al. — Nature Astronomy<br>
+                    <span class="description">JADES spectroscopic characterisation of galaxies beyond z = 10</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~550</td>
+            </tr>
+            <tr>
+                <td class="rank">7</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023NatAs...7..622C/abstract">Spectroscopic confirmation of four metal-poor galaxies at z = 10.3–13.2</a><br>
+                    Curtis-Lake, E. et al. — Nature Astronomy<br>
+                    <span class="description">First spectroscopic confirmations at z > 10, highest at z = 13.2</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~550</td>
+            </tr>
+            <tr>
+                <td class="rank">8</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023NatAs...7..731B/abstract">Stress testing ΛCDM with high-redshift galaxy candidates</a><br>
+                    Boylan-Kolchin, M. — Nature Astronomy<br>
+                    <span class="description">Theoretical argument that JWST galaxies may break the standard cosmological model</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~500</td>
+            </tr>
+            <tr>
+                <td class="rank">9</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...940L..14N/abstract">Two Remarkably Luminous Galaxy Candidates at z ~ 10–12</a><br>
+                    Naidu, R. et al. — ApJL<br>
+                    <span class="description">Two unexpectedly bright galaxies found in the earliest JWST data</span>
+                </td>
+                <td>2022</td>
+                <td class="citations">~500</td>
+            </tr>
+            <tr>
+                <td class="rank">10</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...940L..55F/abstract">A Long Time Ago in a Galaxy Far, Far Away: A Candidate z ~ 12 Galaxy</a><br>
+                    Finkelstein, S. et al. — ApJL<br>
+                    <span class="description">Discovery of "Maisie's Galaxy" at z ~ 12 in the first CEERS data</span>
+                </td>
+                <td>2022</td>
+                <td class="citations">~480</td>
+            </tr>
+            <tr>
+                <td class="rank">11</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...938L..15C/abstract">Early Results from GLASS-JWST. III. Galaxy Candidates at z ~ 9–15</a><br>
+                    Castellano, M. et al. — ApJL<br>
+                    <span class="description">First z > 9 galaxy search in GLASS-JWST imaging of Abell 2744</span>
+                </td>
+                <td>2022</td>
+                <td class="citations">~470</td>
+            </tr>
+            <tr>
+                <td class="rank">12</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023ApJS..265....5H/abstract">A Comprehensive Study of Galaxies at z ~ 9–16</a><br>
+                    Harikane, Y. et al. — ApJS<br>
+                    <span class="description">UV luminosity functions at z = 9–16 finding 23 dropout galaxies</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~460</td>
+            </tr>
+            <tr>
+                <td class="rank">13</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023MNRAS.518.6011D/abstract">The evolution of the galaxy UV luminosity function at z ~ 8–15</a><br>
+                    Donnan, C. et al. — MNRAS<br>
+                    <span class="description">New UV luminosity function measurements combining JWST with ground-based data</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~430</td>
+            </tr>
+            <tr>
+                <td class="rank">14</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023Natur.614..653A/abstract">Early Release Science of WASP-39b with JWST NIRCam</a><br>
+                    Ahrer, E. et al. — Nature<br>
+                    <span class="description">NIRCam transmission spectrum revealing atmospheric composition</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~420</td>
+            </tr>
+            <tr>
+                <td class="rank">15</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023Natur.614..659R/abstract">Early Release Science of WASP-39b with JWST NIRSpec PRISM</a><br>
+                    Rustamkulov, Z. et al. — Nature<br>
+                    <span class="description">Broad 0.5–5.5 μm atmospheric spectrum of WASP-39b</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~400</td>
+            </tr>
+            <tr>
+                <td class="rank">16</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023Natur.614..664A/abstract">Early Release Science of WASP-39b with JWST NIRSpec G395H</a><br>
+                    Alderson, L. et al. — Nature<br>
+                    <span class="description">High-resolution NIRSpec spectrum detecting multiple molecular species</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~380</td>
+            </tr>
+            <tr>
+                <td class="rank">17</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023Natur.614..670F/abstract">Early Release Science of WASP-39b with JWST NIRISS</a><br>
+                    Feinstein, A. et al. — Nature<br>
+                    <span class="description">NIRISS SOSS transmission spectrum breaking modelling degeneracies</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~370</td>
+            </tr>
+            <tr>
+                <td class="rank">18</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023Natur.617..483T/abstract">Photochemically produced SO₂ in the atmosphere of WASP-39b</a><br>
+                    Tsai, S.-M. et al. — Nature<br>
+                    <span class="description">First detection of photochemistry in an exoplanet atmosphere</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~360</td>
+            </tr>
+            <tr>
+                <td class="rank">19</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...938L...2F/abstract">Panic! at the Disks: First Rest-frame Optical Observations of Galaxy Structure at z > 3</a><br>
+                    Ferreira, L. et al. — ApJL<br>
+                    <span class="description">Disk galaxies are common at z > 3 — challenging hierarchical assembly models</span>
+                </td>
+                <td>2022</td>
+                <td class="citations">~350</td>
+            </tr>
+            <tr>
+                <td class="rank">20</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023MNRAS.518.4755A/abstract">Discovery and properties of ultra-high redshift galaxies (9 < z < 12) in SMACS 0723</a><br>
+                    Adams, N. et al. — MNRAS<br>
+                    <span class="description">z > 9 galaxy search in JWST's first deep field</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~340</td>
+            </tr>
+            <tr>
+                <td class="rank">21</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..17L/abstract">The PHANGS-JWST Treasury Survey</a><br>
+                    Lee, J. et al. — ApJL<br>
+                    <span class="description">Unprecedented detail of dust, star formation, and ISM in 19 nearby galaxies</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~330</td>
+            </tr>
+            <tr>
+                <td class="rank">22</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1201A/abstract">Revealing galaxy candidates out to z ~ 16 with JWST</a><br>
+                    Atek, H. et al. — MNRAS<br>
+                    <span class="description">Ultra-faint high-z candidates exploiting gravitational lensing behind SMACS 0723</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~320</td>
+            </tr>
+            <tr>
+                <td class="rank">23</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023PASP..135b8001R/abstract">Performance of NIRCam on JWST in Flight</a><br>
+                    Rieke, M. et al. — PASP<br>
+                    <span class="description">Technical characterisation of the primary imaging instrument</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~310</td>
+            </tr>
+            <tr>
+                <td class="rank">24</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023PASP..135e8001M/abstract">The JWST Mission: Optical Telescope Element Design, Development, and Performance</a><br>
+                    McElwain, M. et al. — PASP<br>
+                    <span class="description">Design and performance of the 6.5-metre primary mirror system</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~300</td>
+            </tr>
+            <tr>
+                <td class="rank">25</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...935..110T/abstract">The GLASS-JWST ERS Program. I. Survey Design</a><br>
+                    Treu, T. et al. — ApJ<br>
+                    <span class="description">Design of the GLASS ERS programme targeting Abell 2744</span>
+                </td>
+                <td>2022</td>
+                <td class="citations">~290</td>
+            </tr>
+            <tr>
+                <td class="rank">26</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...946L..13F/abstract">CEERS Key Paper. I. An Early Look into the First 500 Myr</a><br>
+                    Finkelstein, S. et al. — ApJL<br>
+                    <span class="description">Galaxy formation in the first 500 Myr from the CEERS survey</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~280</td>
+            </tr>
+            <tr>
+                <td class="rank">27</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...942L...9Y/abstract">First Batch of z ~ 11–20 Candidate Objects</a><br>
+                    Yan, H. et al. — ApJL<br>
+                    <span class="description">Very high-z candidates from the first ERO data (some later revised downward)</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~270</td>
+            </tr>
+            <tr>
+                <td class="rank">28</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2024A%26A...690A.288B/abstract">JADES NIRSpec Initial Data Release for the Hubble Ultra Deep Field</a><br>
+                    Bunker, A. et al. — A&A<br>
+                    <span class="description">Deep spectroscopy of 253 sources in the HUDF — redshifts and line fluxes</span>
+                </td>
+                <td>2024</td>
+                <td class="citations">~260</td>
+            </tr>
+            <tr>
+                <td class="rank">29</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023Natur.618...39G/abstract">Thermal emission from the Earth-sized exoplanet TRAPPIST-1 b</a><br>
+                    Greene, T. et al. — Nature<br>
+                    <span class="description">First thermal emission measurement of a rocky exoplanet — suggests no thick atmosphere</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~250</td>
+            </tr>
+            <tr>
+                <td class="rank">30</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2024Natur.627...59M/abstract">A small and vigorous black hole in the early Universe</a><br>
+                    Maiolino, R. et al. — Nature<br>
+                    <span class="description">Active black hole in GN-z11 at z = 10.6 — probing early SMBH formation</span>
+                </td>
+                <td>2024</td>
+                <td class="citations">~250</td>
+            </tr>
+            <tr>
+                <td class="rank">31</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...956L..13M/abstract">Carbon-bearing Molecules in a Possible Hycean Atmosphere</a><br>
+                    Madhusudhan, N. et al. — ApJL<br>
+                    <span class="description">CH₄ and CO₂ on K2-18b with a possible hint of DMS biosignature</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~240</td>
+            </tr>
+            <tr>
+                <td class="rank">32</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023MNRAS.518..425C/abstract">The chemical enrichment in the early Universe as probed by JWST</a><br>
+                    Curti, M. et al. — MNRAS<br>
+                    <span class="description">First direct metallicity measurements of z ~ 8 galaxies</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~230</td>
+            </tr>
+            <tr>
+                <td class="rank">33</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023Natur.620..746Z/abstract">No thick carbon dioxide atmosphere on TRAPPIST-1 c</a><br>
+                    Zieba, S. et al. — Nature<br>
+                    <span class="description">MIRI eclipse ruling out a thick CO₂ atmosphere on TRAPPIST-1 c</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~220</td>
+            </tr>
+            <tr>
+                <td class="rank">34</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023ApJS..269...16R/abstract">JADES Initial Data Release: Revealing the Faint Infrared Sky</a><br>
+                    Rieke, M. et al. — ApJS<br>
+                    <span class="description">9-filter deep imaging of the HUDF — catalogue of ~47,500 sources</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~210</td>
+            </tr>
+            <tr>
+                <td class="rank">35</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...954...31C/abstract">COSMOS-Web: An Overview of the JWST Cosmic Origins Survey</a><br>
+                    Casey, C. et al. — ApJ<br>
+                    <span class="description">Design of the 255-hour COSMOS-Web treasury programme — largest Cycle 1 GO</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~200</td>
+            </tr>
+            <tr>
+                <td class="rank">36</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...959...39H/abstract">A JWST/NIRSpec First Census of Broad-line AGNs at z = 4–7</a><br>
+                    Harikane, Y. et al. — ApJ<br>
+                    <span class="description">10 faint AGN with BH masses 10⁶–10⁸ M☉ at z = 4–7</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~200</td>
+            </tr>
+            <tr>
+                <td class="rank">37</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...954L...4K/abstract">Hidden Little Monsters: Spectroscopic Identification of Low-mass AGNs at z > 5</a><br>
+                    Kocevski, D. et al. — ApJL<br>
+                    <span class="description">Faint AGN at z > 5 that are 100–1000× fainter than known quasars</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~190</td>
+            </tr>
+            <tr>
+                <td class="rank">38</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023A%26A...677A..88B/abstract">JADES NIRSpec Spectroscopy of GN-z11</a><br>
+                    Bunker, A. et al. — A&A<br>
+                    <span class="description">Lyman-alpha emission and anomalous nitrogen abundance at z = 10.6</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~190</td>
+            </tr>
+            <tr>
+                <td class="rank">39</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023arXiv230602465E/abstract">Overview of the JWST Advanced Deep Extragalactic Survey (JADES)</a><br>
+                    Eisenstein, D. et al. — ApJ<br>
+                    <span class="description">Design of the deepest JWST extragalactic imaging and spectroscopy programme</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~180</td>
+            </tr>
+            <tr>
+                <td class="rank">40</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...953L..29L/abstract">A CEERS Discovery of an Accreting SMBH 570 Myr after the Big Bang</a><br>
+                    Larson, R. et al. — ApJL<br>
+                    <span class="description">CEERS_1019 at z = 8.679 — a progenitor of massive z > 6 quasars</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~180</td>
+            </tr>
+            <tr>
+                <td class="rank">41</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2024Natur.633..318C/abstract">Spectroscopic confirmation of two luminous galaxies at a redshift of 14</a><br>
+                    Carniani, S. et al. — Nature<br>
+                    <span class="description">JADES-GS-z14-0 at z = 14.32 — the most distant confirmed galaxy</span>
+                </td>
+                <td>2024</td>
+                <td class="citations">~170</td>
+            </tr>
+            <tr>
+                <td class="rank">42</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023MNRAS.525.2864O/abstract">The JWST FRESCO survey: legacy NIRCam/grism spectroscopy</a><br>
+                    Oesch, P. et al. — MNRAS<br>
+                    <span class="description">54-hour NIRCam grism programme covering 124 arcmin² in GOODS fields</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~170</td>
+            </tr>
+            <tr>
+                <td class="rank">43</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2024ApJ...964...39G/abstract">UNCOVER Spectroscopy Confirms the Ubiquity of AGN in Red Sources at z > 5</a><br>
+                    Greene, J. et al. — ApJ<br>
+                    <span class="description">"Little Red Dots" confirmed as ubiquitous faint AGN at high redshift</span>
+                </td>
+                <td>2024</td>
+                <td class="citations">~160</td>
+            </tr>
+            <tr>
+                <td class="rank">44</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...952...74T/abstract">JADES Imaging of GN-z11: Morphology and Environment</a><br>
+                    Tacchella, S. et al. — ApJ<br>
+                    <span class="description">NIRCam morphological study of GN-z11 and its environment at z = 10.6</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~160</td>
+            </tr>
+            <tr>
+                <td class="rank">45</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...946L..12B/abstract">CEERS Epoch 1 NIRCam Imaging: Reduction Methods and Simulations</a><br>
+                    Bagley, M. et al. — ApJL<br>
+                    <span class="description">Data reduction methods enabling the first CEERS science results</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~150</td>
+            </tr>
+            <tr>
+                <td class="rank">46</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.1009B/abstract">UV luminosity density results at z > 8 from the first JWST/NIRCam fields</a><br>
+                    Bouwens, R. et al. — MNRAS<br>
+                    <span class="description">Limitations of early data and the critical need for spectroscopic follow-up</span>
+                </td>
+                <td>2023</td>
+                <td class="citations">~150</td>
+            </tr>
+            <tr>
+                <td class="rank">47</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...938L..14M/abstract">Early Results from GLASS-JWST. II. NIRCam Photometric Catalog</a><br>
+                    Merlin, E. et al. — ApJL<br>
+                    <span class="description">First JWST extragalactic photometric catalogue from GLASS parallel observations</span>
+                </td>
+                <td>2022</td>
+                <td class="citations">~140</td>
+            </tr>
+            <tr>
+                <td class="rank">48</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2024ApJS..270....7W/abstract">The UNCOVER Survey: HST + JWST Catalog of 60,000 Galaxies near Abell 2744</a><br>
+                    Weaver, J. et al. — ApJS<br>
+                    <span class="description">Combined HST+JWST photometric catalogue of the Pandora's Cluster field</span>
+                </td>
+                <td>2024</td>
+                <td class="citations">~140</td>
+            </tr>
+            <tr>
+                <td class="rank">49</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2024Natur.629...53L/abstract">A recently quenched galaxy 700 million years after the Big Bang</a><br>
+                    Looser, T. et al. — Nature<br>
+                    <span class="description">Earliest known quenched galaxy — already dead at z ~ 7</span>
+                </td>
+                <td>2024</td>
+                <td class="citations">~130</td>
+            </tr>
+            <tr>
+                <td class="rank">50</td>
+                <td>
+                    <a href="https://ui.adsabs.harvard.edu/abs/2024ApJ...963..129M/abstract">Little Red Dots: An Abundant Population of Faint AGN at z ~ 5</a><br>
+                    Matthee, J. et al. — ApJ<br>
+                    <span class="description">The paper that named and defined the mysterious "Little Red Dots" population</span>
+                </td>
+                <td>2024</td>
+                <td class="citations">~130</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="explanation">
+        <h4>Where to explore further</h4>
+        <p><strong>Live publication tracker:</strong> <a href="https://mast.stsci.edu/papertrack/reports/jwst" style="color: #6a82fb;">mast.stsci.edu/papertrack/reports/jwst</a> — the official STScI database, updated continuously.</p>
+        <p><strong>NASA ADS (search all JWST papers):</strong> <a href="https://ui.adsabs.harvard.edu/" style="color: #6a82fb;">ui.adsabs.harvard.edu</a> — search <code>bibgroup:JWST</code> and sort by citation count for the latest rankings.</p>
+        <p><strong>All JWST data (free):</strong> <a href="https://mast.stsci.edu/" style="color: #6a82fb;">mast.stsci.edu</a> — the Mikulski Archive. Every observation becomes public within 12 months (many immediately). You can download and analyse the same data the professionals use.</p>
+    </div>
+
+    <div class="question-box">
+        <h4>What's striking about this list</h4>
+        <ul>
+            <li>Papers #5–#13 are ALL about "impossibly early galaxies" — this is the dominant discovery theme of JWST's first years.</li>
+            <li>Papers #4 and #14–#18 are the WASP-39b atmosphere suite — 5 papers in Nature from a single planet, each using a different JWST instrument. Unprecedented coordination.</li>
+            <li>The #1 most-cited paper is about the telescope's performance, not a science result — because every other JWST paper cites it to describe the instrument.</li>
+            <li>Black hole papers (#30, #36–#40) are newer and climbing fast — the "Little Red Dots" are likely to dominate the next generation of top-cited papers.</li>
+        </ul>
+    </div>
+
+    <div class="speculation-box">
+        <h4>What will JWST's legacy look like in 2040?</h4>
+        <p>If the current trajectory holds (doubling every ~2 years then plateauing as Hubble did), JWST will produce <strong>10,000–15,000 papers</strong> over a 20-year mission — likely surpassing Hubble's 35-year total of 19,000+ in less than half the time.</p>
+        <p>But raw numbers miss the point. The papers that matter most are the ones that change paradigms — and JWST already has several candidates: the "impossible early galaxies" that may require new physics, the first potential biosignature (K2-18b), and the discovery that black holes may have formed before their host galaxies. Any one of these could become a Nobel Prize discovery if confirmed by follow-up observations.</p>
+        <p>The most important JWST paper probably hasn't been written yet. Every major telescope's greatest discovery was something it wasn't designed to find.</p>
+        <p class="caveat">Citation counts are approximate mid-2026 estimates. For live rankings, query NASA ADS directly with bibgroup:JWST sorted by citation_count descending.</p>
+    </div>
+</section>
+
+<div class="page-nav">
+    <a href="politics.html" class="prev">Politics & Money</a>
+    <a href="future.html" class="next">What's Next</a>
+</div>
+
+<footer>
+    <p>All images are public domain, courtesy of NASA, ESA, CSA, and STScI.</p>
+</footer>
+
+</body>
+</html>
