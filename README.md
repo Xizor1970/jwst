@@ -12,9 +12,11 @@
 
 <br>
 
-[![Pages](https://img.shields.io/badge/pages-17-f0c27f?style=flat-square)](#sections)
+[![Pages](https://img.shields.io/badge/pages-18-f0c27f?style=flat-square)](#sections)
 [![Animations](https://img.shields.io/badge/interactive_animations-7-6a82fb?style=flat-square)](#interactive-animations)
 [![Vanilla](https://img.shields.io/badge/dependencies-zero-5a9?style=flat-square)](#)
+
+### [View the live site →](https://xizor1970.github.io/jwst/)
 
 </div>
 
